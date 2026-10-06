@@ -1,0 +1,18 @@
+{
+  "revision": 1,
+  "created_at": "20261006T024434Z",
+  "modified_at": "20261006T024434Z",
+  "source_url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202511/t20251104_4258873.html",
+  "original_url": "https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm",
+  "source_title": "国务院办公厅关于2026年部分节假日安排的通知",
+  "document_number": "国办发明电〔2025〕7号",
+  "published_date": "2025-11-04",
+  "source_snapshot": "2026-notice.txt",
+  "source_metadata": "2026-notice-meta.json",
+  "events": [
+    {"date": "2026-10-07", "title": "国庆节 · 放假", "kind": "holiday"},
+    {"date": "2026-10-09", "title": "普通日期对照", "kind": "control", "refresh_probe": true},
+    {"date": "2026-10-10", "title": "国庆调休 · 上班", "kind": "workday"},
+    {"date": "2026-10-11", "title": "普通周末对照", "kind": "control"}
+  ]
+}

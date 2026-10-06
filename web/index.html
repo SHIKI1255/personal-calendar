@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>班休角标兼容测试 · Personal Calendar</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;color:#182635;background:#f4f7fa}body{max-width:760px;margin:0 auto;padding:32px 20px 64px}h1{font-size:1.85rem;line-height:1.3}h2{font-size:1.2rem;margin-top:32px}.tag{color:#65501a;background:#fff0c2;padding:5px 12px;border-radius:20px;display:inline-block;font-size:.85rem}.card{padding:24px;background:white;border:1px solid #dbe2eb;border-radius:16px;margin-top:20px}.button{display:inline-block;background:#184d86;color:white;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600}a{color:#184d86}code{overflow-wrap:anywhere;font-size:.85rem}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:10px 6px;border-bottom:1px solid #dbe2eb}p,li{overflow-wrap:anywhere}.muted{color:#526475}input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #9aa9bb;border-radius:8px;font:inherit;font-size:.8rem}@media(prefers-color-scheme:dark){:root{color:#e6edf5;background:#101820}.card{background:#192532;border-color:#35465a}a{color:#91bfff}.button{color:white}.muted{color:#afbfce}td,th{border-color:#35465a}input{background:#101820;color:#e6edf5}}@media(max-width:440px){body{padding-top:20px}.card{padding:18px}h1{font-size:1.6rem}}
+</style>
+<header><span class="tag">兼容性验证 · r{{REVISION}}</span><h1>先确认，你的日历能显示班与休。</h1><p class="muted">此订阅只有 4 条测试事件，尚不是完整节日日历。目标环境：iPhone 18 Pro Max · iOS 27 · 香港地区。</p></header>
+<main>
+<section class="card"><h2 style="margin-top:0">添加测试订阅</h2>
+<p><a class="button" href="webcal://shiki1255.github.io/personal-calendar/compatibility/apple-badges.ics">在 Apple 日历中订阅</a></p>
+<p>按钮无法打开时，在“日历 → 日历 → 添加日历 → 添加订阅日历”中粘贴下方地址。请使用订阅方式，下载后导入不会验证自动刷新。</p>
+<input aria-label="测试订阅 HTTPS 地址" readonly value="https://shiki1255.github.io/personal-calendar/compatibility/apple-badges.ics">
+<p><a href="compatibility/apple-badges.ics">查看 ICS 文件</a> · <a href="status.json">查看当前测试版本</a></p></section>
+<section class="card"><h2 style="margin-top:0">检查 2026 年 10 月</h2>
+<p>保留香港地区设置。暂时隐藏其他节假日日历，只显示此测试订阅，避免把其他订阅的角标算作测试结果。</p>
+<table><thead><tr><th>日期</th><th>事件</th><th>预期原生角标</th></tr></thead><tbody>
+<tr><td>10 月 7 日</td><td>国庆节 · 放假</td><td>休</td></tr>
+<tr><td>10 月 9 日</td><td>普通日期对照 · r{{REVISION}}</td><td>无</td></tr>
+<tr><td>10 月 10 日</td><td>国庆调休 · 上班</td><td>班</td></tr>
+<tr><td>10 月 11 日</td><td>普通周末对照</td><td>无</td></tr>
+</tbody></table>
+<p>“班／休”应出现在日期旁的系统角标位置。事件标题里的“放假／上班”文字不算角标通过。</p>
+<p>请在原 Codex 聊天中反馈四个日期的结果，以及 10 月 9 日显示的版本。若首轮通过，下一步会在同一地址发布 r2；保留订阅，确认 r1 更新为 r2 且总事件数仍为 4。无需在此网页提交个人信息。</p>
+</section>
+<section class="card"><h2 style="margin-top:0">通过后提供两种订阅模式</h2><p><strong>整合订阅：</strong>只添加 calendar.ics，包含调休、节日和节气，内部去重。</p><p><strong>分开订阅：</strong>按需组合 holidays.ics、festivals.ics、solar_terms.ics，可以分别显示、隐藏和选颜色。</p><p class="muted">这四个正式订阅目前尚未开放。最终范围为前三年、当年、后三年，按年份滚动。请勿同时添加整合版和它的分类，以免重复。</p></section>
+<p class="muted">日期依据 <a href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202511/t20251104_4258873.html">国务院办公厅官方公告转载</a> · <a href="compatibility/2026-notice.txt">公告正文存档</a> · <a href="https://github.com/SHIKI1255/personal-calendar">项目源码</a></p>
+</main></html>

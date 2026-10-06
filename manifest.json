@@ -1,0 +1,12 @@
+{
+  "repo_slug": "personal-calendar",
+  "github_repo": "SHIKI1255/personal-calendar",
+  "default_branch": "main",
+  "public_base_url": "https://shiki1255.github.io/personal-calendar",
+  "phase": "apple_badge_probe",
+  "device_acceptance": "pending",
+  "local_governance": "self-contained",
+  "central_registry_registered": false,
+  "local_workbench": "D:/CodexProjects/codex_workbench/projects/personal-calendar",
+  "automatic_cleanup": false
+}

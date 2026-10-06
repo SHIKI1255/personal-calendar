@@ -1,0 +1,10 @@
+version: 1
+repository: SHIKI1255/personal-calendar
+default_branch: main
+identity_manifest: manifest.json
+checks:
+  - python -B scripts/preflight.py
+  - python -B -m unittest discover -s tests -v
+generated_output: external_workbench_or_runner_temp
+automatic_cleanup: false
+full_build_gate: real_device_badges_and_same_url_refresh
