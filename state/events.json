@@ -42,6 +42,90 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "calendar.ics/arbor-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "4d5de0c581fe9ada9005b574285a0ff14a079d196107ce4b588fb31875f5604a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "796cde4ff378301ab3f4d01b88024df49d2483cd77e7918109981a35ee745feb",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "7ce2ca1af97985e4405e99a5f1462cdd58c8927583dd0bb2fd2967bc13a6f1e1",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "23cc9301761255ac582e134a224b693c124c569cf51dbab09d00114452375721",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "cc746ec2094c81c6c4f4bf6621a80a045dc9ade31f271450c67f6c6e2dadd7d1",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "c649891199ceac3fa71078f770552a46c6070ef8960ea1e6ee7951660dbd4970",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/arbor-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "6fa5ce411505417658187d2afe1918cfcb78e0aea3e59f56265d527700acab27",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "d50d83a962e2eeb19f093616ed5470ee0f884660fa4b5ca01b7d31b5ebfd7baa",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "4e0c452309e1582f1b2e70d15bd34e08c04e50af24395a9bb6a7e0ca2bb45505",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "c33e8555280d2a7ce8be8c5f41ef343711270f6a448ae156507d1915d9a3e4d5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "5adeec315029a2082a4f6e2d964a5eccb80ea8c48e62a00a154edd61279e4770",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "9e310d718ffa8cc8456126512ed01abadd5d36c365f393db45df2e0bb9b0701d",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "2eb3f74c648036c765b7fb355558e764a93383fca7594620559bf7ec4100714c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/army-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "dee626023461cc45c0f71e3f0124a5ed7e2d50f714aeefcebdbf5875592490de",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "calendar.ics/black-friday-g2023": {
       "created": "20261006T033147Z",
       "hash": "1414f0be60cae423533ccb4b0d9a3d2b48920808eef5a2d0e46aeba8a6fe7915",
@@ -82,6 +166,48 @@
       "created": "20261006T033147Z",
       "hash": "980f777ad7f4ba709151ea04364120e2ca759c026cc706358477acb416a853c8",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "ef01427f2f0c1a81ef9f09f977def9b762563f7048417eebe0e65e9209099159",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "1c9d9296a7fc7371852789d0ec9a69feef49e9e5e870cc37c45a802f73910998",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "b2332fd15f4f148f514cb98694003c798837700f5c3fcab26d3001d7043fbf6a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "cb173d8babdb047dba8af116521af70ecafbb2d5ed88273de92efe9bfea60d5c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "a6b96b22afa69d114290eeed9b3c89829acdd7ee603777f7b56848de7b15b371",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "fd57e45e82347e00fcd2f89d7e6b18ccdf2e10335e1b91431e4ab8efc2d408b5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/childrens-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "7201472cad0524274455502280c340d2254465e18018ba9cec924b293f5930d3",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "calendar.ics/christmas-eve-g2023": {
@@ -168,6 +294,48 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "calendar.ics/cpc-founding-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "32f2acb06bb6c081de88ff6160486b27727ff45c435b49640ef2939a2576303e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "2a57849a129a644101ff3fccde8ba503cf36b93e34d80c3ba5f37384a0c7cffa",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "8381a0f42bfd5e9076fc3b3fd69184441e914439878b3d7974ae394c2a53947f",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "1454d971a63d22370d418ec2084935146a38add173660960f843f2ecfde58ad9",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "df5d3fee031fcba50731dd6d4f23075adff00d608d73b2a6d6bb4ce3c60efc73",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "12dc1ac7d99eb12bb103f7fdd29901ab1771267db9499d6987e25cd576e893dd",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/cpc-founding-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "661165316896bc760cef07a1fd52d309416fea4e8567e4d9ff29af1f1a42fc52",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "calendar.ics/double-ninth-l2023": {
       "created": "20261006T033147Z",
       "hash": "809d6c9d211c7148460f3247f23210b0a7d20d86922ecf4bbadba87bac30f6e1",
@@ -250,6 +418,48 @@
       "created": "20261006T033147Z",
       "hash": "836b263bf4a95b1f602d44d63e775617e856c9922c8dda0b1a993e05f1b993ca",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2023": {
+      "created": "20261006T035406Z",
+      "hash": "290827040d71a10f08e16d94f0f8a3cb23e0c72f8accccda26900c122970a0ed",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2024": {
+      "created": "20261006T035406Z",
+      "hash": "180cbaa4baf65e7cc6b08e92347436ba1c2c3d835e133df93eb3b996b9d55e02",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2025": {
+      "created": "20261006T035406Z",
+      "hash": "556b3ab3d431de1de3d2934ba1092e3b437925fce08ad9352a10170746067394",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2026": {
+      "created": "20261006T035406Z",
+      "hash": "7cb7afe07464c8b3e8fcfbc7ca475bc8068ad7dfb4150569b1b1fae532d3c533",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2027": {
+      "created": "20261006T035406Z",
+      "hash": "0ea77c5ff049f576a2fcb22dd49785bb50b8645eef5e76e54925359c7df2732b",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2028": {
+      "created": "20261006T035406Z",
+      "hash": "3a4234634f79ce5c9f8e2c1b6fdd2f6861547d9fd6c6e268a48aa6ebe27290a7",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/dragon-head-l2029": {
+      "created": "20261006T035406Z",
+      "hash": "c5a604b84ff9dd31b3a049a6eeadc6c934e4d5f2ad19c0491a139f176a0395d1",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "calendar.ics/easter-g2023": {
@@ -1168,6 +1378,48 @@
       "created": "20261006T033147Z",
       "hash": "d1f521b76e4c10ea0aa6c76479c26f228fa5b17fabf4b595ad81644c808fc2e3",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "2547bf7fe411dc5afbc752708f93b2fa14f5c61866c6fb5ed8418ddf66b93b1a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "797fb9ad34d21dbc81a3e77f84336571d26c92ce44892e2f82373a0d72e7165c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "0fe61881e1f1b8c0578b169a4041b0051cd5007c5923de3548827489a8543617",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "323412f6d314041e08a3370e43caebab6bc100c303b138523532c447ee25af01",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "2f0d266ca629d605e3a935ada549ecc7e79e03e30bf98c735093ae56d30efc9e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "625a2c05d0b27a5eac6dca3de44c3ee0af66e7daa2e06389d1dc189f4b087a59",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/teachers-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "eb4c26af7ddeff24755f69189b1f42b41c07c2b086d7d7ab0cf0013bb9915262",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "calendar.ics/term-bailu-g2023": {
@@ -2262,6 +2514,48 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "calendar.ics/youth-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "9e0e68346b882ddd0539fd88060e08ec2053b0b7b265e8a52244e44daf0736ac",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "0113555555d9773706384481c1dab80bdc5b1addb1bb562d3772b327967836b5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "ccb5ed101ddbbde2a516bbb33d8f3211c246167996f727428df30058405f725e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "1963d13bfa011ff3a08d502a92f55ec844170b6553cede1393e367eeb6ac2b54",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "d8692b96b83d0b0a609def5479946ddc50788db9f6effdb62eb0d5553792e937",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "6078aa03fbfe35d8c345c50b7ce833e49890a3df254bb4d86ca0694138f99301",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "calendar.ics/youth-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "455ac3614e67289d54ff938384e8a2418063dad41fd7700f6c2f9c446e56d9b7",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "festivals.ics/april-fools-g2023": {
       "created": "20261006T033147Z",
       "hash": "ddb41e0ad04a32ee041f37f5d6b324dc327710d4548d0a346d74f68ea747ec8a",
@@ -2304,6 +2598,90 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "festivals.ics/arbor-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "4d5de0c581fe9ada9005b574285a0ff14a079d196107ce4b588fb31875f5604a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "796cde4ff378301ab3f4d01b88024df49d2483cd77e7918109981a35ee745feb",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "7ce2ca1af97985e4405e99a5f1462cdd58c8927583dd0bb2fd2967bc13a6f1e1",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "23cc9301761255ac582e134a224b693c124c569cf51dbab09d00114452375721",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "cc746ec2094c81c6c4f4bf6621a80a045dc9ade31f271450c67f6c6e2dadd7d1",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "c649891199ceac3fa71078f770552a46c6070ef8960ea1e6ee7951660dbd4970",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/arbor-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "6fa5ce411505417658187d2afe1918cfcb78e0aea3e59f56265d527700acab27",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "d50d83a962e2eeb19f093616ed5470ee0f884660fa4b5ca01b7d31b5ebfd7baa",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "4e0c452309e1582f1b2e70d15bd34e08c04e50af24395a9bb6a7e0ca2bb45505",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "c33e8555280d2a7ce8be8c5f41ef343711270f6a448ae156507d1915d9a3e4d5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "5adeec315029a2082a4f6e2d964a5eccb80ea8c48e62a00a154edd61279e4770",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "9e310d718ffa8cc8456126512ed01abadd5d36c365f393db45df2e0bb9b0701d",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "2eb3f74c648036c765b7fb355558e764a93383fca7594620559bf7ec4100714c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/army-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "dee626023461cc45c0f71e3f0124a5ed7e2d50f714aeefcebdbf5875592490de",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "festivals.ics/black-friday-g2023": {
       "created": "20261006T033147Z",
       "hash": "1414f0be60cae423533ccb4b0d9a3d2b48920808eef5a2d0e46aeba8a6fe7915",
@@ -2344,6 +2722,48 @@
       "created": "20261006T033147Z",
       "hash": "980f777ad7f4ba709151ea04364120e2ca759c026cc706358477acb416a853c8",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "ef01427f2f0c1a81ef9f09f977def9b762563f7048417eebe0e65e9209099159",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "1c9d9296a7fc7371852789d0ec9a69feef49e9e5e870cc37c45a802f73910998",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "b2332fd15f4f148f514cb98694003c798837700f5c3fcab26d3001d7043fbf6a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "cb173d8babdb047dba8af116521af70ecafbb2d5ed88273de92efe9bfea60d5c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "a6b96b22afa69d114290eeed9b3c89829acdd7ee603777f7b56848de7b15b371",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "fd57e45e82347e00fcd2f89d7e6b18ccdf2e10335e1b91431e4ab8efc2d408b5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/childrens-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "7201472cad0524274455502280c340d2254465e18018ba9cec924b293f5930d3",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "festivals.ics/christmas-eve-g2023": {
@@ -2430,6 +2850,48 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "festivals.ics/cpc-founding-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "32f2acb06bb6c081de88ff6160486b27727ff45c435b49640ef2939a2576303e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "2a57849a129a644101ff3fccde8ba503cf36b93e34d80c3ba5f37384a0c7cffa",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "8381a0f42bfd5e9076fc3b3fd69184441e914439878b3d7974ae394c2a53947f",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "1454d971a63d22370d418ec2084935146a38add173660960f843f2ecfde58ad9",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "df5d3fee031fcba50731dd6d4f23075adff00d608d73b2a6d6bb4ce3c60efc73",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "12dc1ac7d99eb12bb103f7fdd29901ab1771267db9499d6987e25cd576e893dd",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/cpc-founding-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "661165316896bc760cef07a1fd52d309416fea4e8567e4d9ff29af1f1a42fc52",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "festivals.ics/double-ninth-l2023": {
       "created": "20261006T033147Z",
       "hash": "809d6c9d211c7148460f3247f23210b0a7d20d86922ecf4bbadba87bac30f6e1",
@@ -2512,6 +2974,48 @@
       "created": "20261006T033147Z",
       "hash": "836b263bf4a95b1f602d44d63e775617e856c9922c8dda0b1a993e05f1b993ca",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2023": {
+      "created": "20261006T035406Z",
+      "hash": "290827040d71a10f08e16d94f0f8a3cb23e0c72f8accccda26900c122970a0ed",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2024": {
+      "created": "20261006T035406Z",
+      "hash": "180cbaa4baf65e7cc6b08e92347436ba1c2c3d835e133df93eb3b996b9d55e02",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2025": {
+      "created": "20261006T035406Z",
+      "hash": "556b3ab3d431de1de3d2934ba1092e3b437925fce08ad9352a10170746067394",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2026": {
+      "created": "20261006T035406Z",
+      "hash": "7cb7afe07464c8b3e8fcfbc7ca475bc8068ad7dfb4150569b1b1fae532d3c533",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2027": {
+      "created": "20261006T035406Z",
+      "hash": "0ea77c5ff049f576a2fcb22dd49785bb50b8645eef5e76e54925359c7df2732b",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2028": {
+      "created": "20261006T035406Z",
+      "hash": "3a4234634f79ce5c9f8e2c1b6fdd2f6861547d9fd6c6e268a48aa6ebe27290a7",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/dragon-head-l2029": {
+      "created": "20261006T035406Z",
+      "hash": "c5a604b84ff9dd31b3a049a6eeadc6c934e4d5f2ad19c0491a139f176a0395d1",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "festivals.ics/easter-g2023": {
@@ -3432,6 +3936,48 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "festivals.ics/teachers-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "2547bf7fe411dc5afbc752708f93b2fa14f5c61866c6fb5ed8418ddf66b93b1a",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "797fb9ad34d21dbc81a3e77f84336571d26c92ce44892e2f82373a0d72e7165c",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "0fe61881e1f1b8c0578b169a4041b0051cd5007c5923de3548827489a8543617",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "323412f6d314041e08a3370e43caebab6bc100c303b138523532c447ee25af01",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "2f0d266ca629d605e3a935ada549ecc7e79e03e30bf98c735093ae56d30efc9e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "625a2c05d0b27a5eac6dca3de44c3ee0af66e7daa2e06389d1dc189f4b087a59",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/teachers-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "eb4c26af7ddeff24755f69189b1f42b41c07c2b086d7d7ab0cf0013bb9915262",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
     "festivals.ics/thanksgiving-us-g2023": {
       "created": "20261006T033147Z",
       "hash": "29f17571c4d790754b64b477afa60777d7ee41158139df3f8686cebfe67f310b",
@@ -3556,6 +4102,48 @@
       "created": "20261006T033147Z",
       "hash": "7287b293ec2bd7eb8b9b17807a0d184dfee7871ddccce0c717f03e48b76286a7",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2023": {
+      "created": "20261006T035406Z",
+      "hash": "9e0e68346b882ddd0539fd88060e08ec2053b0b7b265e8a52244e44daf0736ac",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2024": {
+      "created": "20261006T035406Z",
+      "hash": "0113555555d9773706384481c1dab80bdc5b1addb1bb562d3772b327967836b5",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2025": {
+      "created": "20261006T035406Z",
+      "hash": "ccb5ed101ddbbde2a516bbb33d8f3211c246167996f727428df30058405f725e",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2026": {
+      "created": "20261006T035406Z",
+      "hash": "1963d13bfa011ff3a08d502a92f55ec844170b6553cede1393e367eeb6ac2b54",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2027": {
+      "created": "20261006T035406Z",
+      "hash": "d8692b96b83d0b0a609def5479946ddc50788db9f6effdb62eb0d5553792e937",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2028": {
+      "created": "20261006T035406Z",
+      "hash": "6078aa03fbfe35d8c345c50b7ce833e49890a3df254bb4d86ca0694138f99301",
+      "modified": "20261006T035406Z",
+      "sequence": 0
+    },
+    "festivals.ics/youth-day-g2029": {
+      "created": "20261006T035406Z",
+      "hash": "455ac3614e67289d54ff938384e8a2418063dad41fd7700f6c2f9c446e56d9b7",
+      "modified": "20261006T035406Z",
       "sequence": 0
     },
     "solar_terms.ics/qingming-g2023": {
