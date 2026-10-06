@@ -45,6 +45,6 @@ ICS content is copied into this repository.
 Easter reference: US Naval Observatory, The Date of Easter,
 https://aa.usno.navy.mil/faq/easter (Oudin algorithm, explanatory integer steps).
 
-Independent test parser: icalendar (BSD-2-Clause); python-dateutil (Apache-2.0/BSD);
-six (MIT); tzdata (Apache-2.0 package, IANA data public domain). Packages are installed
+Independent test parser: icalendar (BSD-2-Clause); typing-extensions (PSF-2.0);
+python-dateutil (Apache-2.0/BSD); six (MIT); tzdata (Apache-2.0 package, IANA data public domain). Packages are installed
 separately under their own licenses, locked in the requirements files.
