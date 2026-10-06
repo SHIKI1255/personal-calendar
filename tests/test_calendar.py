@@ -24,6 +24,12 @@ class CalendarTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.config, cls.rules = load_inputs()
+        # Algorithm regression tests use a complete reference configuration. User
+        # display preferences must not make the independent date suite fail.
+        cls.config.update(past_years=3, future_years=3)
+        cls.config['categories'] = {key: True for key in cls.config['categories']}
+        cls.config['festivals'].update(little_new_year='both', easter_monday=False, disabled_ids=[])
+        cls.config['solar_terms']['disabled_ids'] = []
         cls.feeds, cls.window = make_feeds(cls.config, cls.rules, NOW)
         cls.raw, cls.state = render_feeds(cls.feeds, {}, NOW)
 
@@ -173,11 +179,36 @@ class CalendarTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)
             report=build(root/'site',root/'state.json',NOW)
-            self.assertEqual(report['years'],[2023,2029])
+            self.assertEqual(report['years'],list(year_window(NOW,load_inputs()[0])))
             self.assertFalse((root/'site/holidays.ics').exists())
             self.assertTrue((root/'site/compatibility/apple-badges.ics').is_file())
             self.assertEqual(set(report['event_counts']),set(self.feeds))
             self.assertNotIn('.nojekyll',report['files'])
+
+    def test_custom_display_configuration_builds_and_unknown_ids_fail(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            config=root/'config.toml'
+            config.write_text('''timezone="Asia/Shanghai"
+past_years=0
+future_years=0
+[categories]
+traditional=false
+common=false
+holy_week=false
+solar_terms=true
+[festivals]
+little_new_year="none"
+easter_monday=false
+disabled_ids=[]
+[solar_terms]
+disabled_ids=["qingming"]
+''',encoding='utf-8')
+            report=build(root/'site',root/'state.json',NOW,config_path=config)
+            self.assertEqual(report['years'],[2026,2026])
+            self.assertEqual(report['event_counts'],{'calendar.ics':23,'festivals.ics':0,'solar_terms.ics':23})
+            config.write_text(config.read_text().replace('"qingming"','"unknown-term"'))
+            with self.assertRaises(ValueError):load_inputs(config)
 
 
 if __name__ == '__main__':

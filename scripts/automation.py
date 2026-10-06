@@ -24,7 +24,7 @@ def gh_api(endpoint, method="GET", payload=None):
     if payload is not None:
         command += ["--input", "-"]
     result = subprocess.run(command, input=json.dumps(payload) if payload is not None else None,
-                            capture_output=True, text=True, check=True)
+                            capture_output=True, text=True, encoding="utf-8", check=True)
     return json.loads(result.stdout) if result.stdout.strip() else None
 
 
