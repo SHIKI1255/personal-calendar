@@ -16,17 +16,23 @@
 
 自动验证以 [Update calendar](https://github.com/SHIKI1255/personal-calendar/actions/workflows/update-calendar.yml) 与线上 [status.json](https://shiki1255.github.io/personal-calendar/status.json) 为准。月度健康记录仅在真实线上回读成功后生成。
 
+2026-10-06 首次正式发布 [37409351057](https://github.com/SHIKI1255/personal-calendar/actions/runs/37409351057) 成功；后续 [37409598179](https://github.com/SHIKI1255/personal-calendar/actions/runs/37409598179) 的 37 项测试及线上回读通过，内容未变化，Pages 上传/部署步骤均跳过，未产生额外提交。覆盖 2023—2029：整合 377 条、节日 216 条、节气 168 条。
+
+同日从首次成功运行下载 last-good-site，校验全部文件哈希并与线上内容比对一致；未执行线上降级。Windows 本地重建与 Linux CI 发布得到相同版本。浏览器页面已检查，不能代替 iPhone 日历实测。
+
 | 项目 | 验收方式 | 状态 |
 |---|---|---|
 | 2023—2029 农历 | 2,557 个公历日逐日对照 HKO 原文 | 本地独立测试通过 |
 | 2023—2029 节气 | 168 个日期对照 HKO 原文 | 本地独立测试通过 |
 | 普通节日规则与 ICS | 独立解析与行为测试 | 本地测试通过；CI 每次重验 |
-| 部署与 HTTP/MIME/哈希 | Actions 发布后匿名回读 | 以最近成功 publish job 为准 |
+| 部署与 HTTP/MIME/哈希 | Actions 发布后匿名回读 | 首次发布与后续无变化运行均通过 |
 | 整合版手机全天展示 | 用户实际订阅正式 calendar.ics | 待用户实测 |
 | 分类版显示及组合 | 用户实际订阅两个分类 | 待用户实测 |
 | 相同 URL 自动更新且无重复 | 后续真实内容更新前后比对 | 待用户实测；不能用重新订阅代替 |
 | iPad/macOS/Google/Outlook | 未运行实际客户端 | 未验证 |
 
 手机验收时先退订两份旧测试。一次只启用自建整合版，或两个分类；Apple 官方日历可单独隐藏以确认自建事件来源。初次观察后反馈结果，再记录验收。无需变更系统地区。
+
+用户于 2026-10-06 选择“稍后实测”，手机验收继续保持待验证。
 
 事件修订/同 URL 字节变化已由自动测试验证，但不等同于手机后台刷新验证。不为测试而修改真实节日日期。
