@@ -5,6 +5,11 @@
   "public_base_url": "https://shiki1255.github.io/personal-calendar",
   "phase": "apple_badge_probe",
   "device_acceptance": "pending",
+  "compatibility_observations": {
+    "baseline_r1": "user_reported_events_visible_native_badges_absent",
+    "grouped_b1": "pending_device_check",
+    "reported_on": "2026-10-06"
+  },
   "local_governance": "self-contained",
   "central_registry_registered": false,
   "local_workbench": "D:/CodexProjects/codex_workbench/projects/personal-calendar",

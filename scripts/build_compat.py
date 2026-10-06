@@ -13,6 +13,7 @@ from uuid import NAMESPACE_URL, uuid5
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://shiki1255.github.io/personal-calendar"
 FEED = "compatibility/apple-badges.ics"
+CANDIDATE_FEED = "compatibility/apple-badges-b1.ics"
 BADGES = {"holiday": "WORK-HOLIDAY", "workday": "ALTERNATE-WORKDAY"}
 
 
@@ -95,6 +96,43 @@ def render_calendar(probe: dict) -> bytes:
     return b"\r\n".join(fold(line) for line in lines) + b"\r\n"
 
 
+def render_grouped_candidate(probe: dict) -> bytes:
+    """Diagnostic B1: observed Apple metadata, independently sourced dates.
+
+    This is not a production feed or an assertion that all properties cause badges.
+    LANGUAGE=zh_CN mirrors Apple's legacy spelling ONLY in this diagnostic feed;
+    the standards-oriented baseline keeps LANGUAGE=zh-CN. DTSTAMP remains a valid
+    UTC DATE-TIME; Apple's DATE-valued stamp is deliberately not reproduced.
+    New UIDs isolate B1 from the frozen r1 and Apple's official events.
+    """
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SHIKI1255//Apple Badge Probe B1//ZH",
+             "CALSCALE:GREGORIAN", "X-WR-CALNAME:中国大陆节假日",
+             "X-APPLE-LANGUAGE:zh", "X-APPLE-REGION:CN"]
+    group_id = str(uuid5(NAMESPACE_URL, BASE + "/probe-b/holiday/national-day"))
+    # These dates are verified against the government snapshot in load_probe().
+    events = [
+        (date(2026, 10, 1), date(2026, 10, 8), "国庆节（休）", "holiday"),
+        (date(2026, 10, 9), None, "普通日期对照 · B1", "control"),
+        (date(2026, 10, 10), None, "国庆节（班）", "workday"),
+        (date(2026, 10, 11), None, "普通周末对照 · B1", "control"),
+    ]
+    for start, end, title, kind in events:
+        identity = str(uuid5(NAMESPACE_URL, BASE + "/probe-b/event/" + start.isoformat()))
+        universal_id = group_id if kind in BADGES else identity
+        lines.extend(["BEGIN:VEVENT", f"DTSTAMP:{probe['created_at']}", f"UID:{identity}",
+                      f"DTSTART;VALUE=DATE:{start:%Y%m%d}"])
+        # A DATE start without DTEND/DURATION means one day (RFC 5545 3.6.1).
+        if end is not None:
+            lines.append(f"DTEND;VALUE=DATE:{end:%Y%m%d}")
+        lines.extend(["CLASS:PUBLIC", "SUMMARY;LANGUAGE=zh_CN:" + text_escape(title),
+                      "TRANSP:TRANSPARENT", "CATEGORIES:節慶"])
+        if kind in BADGES:
+            lines.append("X-APPLE-SPECIAL-DAY:" + BADGES[kind])
+        lines.extend(["X-APPLE-UNIVERSAL-ID:" + universal_id, "END:VEVENT"])
+    lines.append("END:VCALENDAR")
+    return b"\r\n".join(fold(line) for line in lines) + b"\r\n"
+
+
 def build(output: Path) -> dict:
     output = output.resolve()
     if output == ROOT or ROOT in output.parents:
@@ -105,13 +143,19 @@ def build(output: Path) -> dict:
     target = output / FEED
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_bytes(calendar)
+    candidate = render_grouped_candidate(probe)
+    (output / CANDIDATE_FEED).write_bytes(candidate)
     template = (ROOT / "web/index.html").read_text(encoding="utf-8")
     (output / "index.html").write_text(template.replace("{{REVISION}}", html.escape(str(probe["revision"]))), encoding="utf-8")
     (output / ".nojekyll").write_bytes(b"")
     report = {"phase": "apple_badge_probe", "revision": probe["revision"],
               "device_acceptance": "pending", "event_count": 4,
               "feed": FEED, "sha256": hashlib.sha256(calendar).hexdigest(),
-              "scheduled_data_updates": False}
+              "scheduled_data_updates": False,
+              "baseline_device_result": "user_reported_events_visible_native_badges_absent",
+              "candidate": {"profile": "B1", "feed": CANDIDATE_FEED,
+                            "sha256": hashlib.sha256(candidate).hexdigest(),
+                            "event_count": 4, "device_acceptance": "pending"}}
     (output / "status.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Only inert source text is published; never copy the government page's scripts.
     for filename in (probe["source_snapshot"], probe["source_metadata"]):
