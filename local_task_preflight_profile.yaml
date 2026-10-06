@@ -7,4 +7,4 @@ checks:
   - python -B -m unittest discover -s tests -v
 generated_output: external_workbench_or_runner_temp
 automatic_cleanup: false
-full_build_gate: real_device_badges_and_same_url_refresh
+full_build_gate: offline_algorithms_independent_fixtures_and_ics_validation

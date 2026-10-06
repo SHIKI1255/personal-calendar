@@ -89,12 +89,12 @@ class CompatibilityTests(unittest.TestCase):
             report = build(output)
             actual = (output / FEED).read_bytes()
             self.assertEqual(report["sha256"], hashlib.sha256(actual).hexdigest())
-            self.assertEqual(report["device_acceptance"], "pending")
+            self.assertEqual(report["device_acceptance"], "failed")
             for name in ("calendar.ics", "holidays.ics", "festivals.ics", "solar_terms.ics"):
                 self.assertFalse((output / name).exists())
             self.assertEqual(json.loads((output / "status.json").read_text())["event_count"], 4)
             self.assertEqual(report["candidate"]["sha256"], hashlib.sha256((output / CANDIDATE_FEED).read_bytes()).hexdigest())
-            self.assertEqual(report["candidate"]["device_acceptance"], "pending")
+            self.assertEqual(report["candidate"]["device_acceptance"], "failed")
 
     def test_reject_build_into_source(self):
         with self.assertRaises(ValueError):

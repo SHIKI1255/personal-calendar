@@ -3,15 +3,18 @@
   "github_repo": "SHIKI1255/personal-calendar",
   "default_branch": "main",
   "public_base_url": "https://shiki1255.github.io/personal-calendar",
-  "phase": "apple_badge_probe",
+  "phase": "festivals_and_solar_terms",
   "device_acceptance": "pending",
   "compatibility_observations": {
     "baseline_r1": "user_reported_events_visible_native_badges_absent",
-    "grouped_b1": "pending_device_check",
+    "grouped_b1": "user_reported_native_badges_absent",
     "reported_on": "2026-10-06"
   },
   "local_governance": "self-contained",
   "central_registry_registered": false,
   "local_workbench": "D:/CodexProjects/codex_workbench/projects/personal-calendar",
-  "automatic_cleanup": false
+  "automatic_cleanup": false,
+  "native_badges": "cancelled_by_user",
+  "work_rest_schedules": "external_apple_subscription",
+  "production_feeds": ["calendar.ics", "festivals.ics", "solar_terms.ics"]
 }

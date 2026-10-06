@@ -3,14 +3,16 @@
 Use PowerShell 7 for local shell commands. Read local_task_preflight_profile.yaml
 and manifest.json before changes. This is SHIKI1255/personal-calendar, branch main.
 
-Current release is an Apple badge compatibility probe. Full calendar development
-is gated on the user's real-device acceptance, including a same-URL refresh test.
-Do not mark the gate passed based on ICS parsing, screenshots from others, or CI.
-Do not change the device region or substitute title text for native badges.
+The user cancelled self-hosted work/rest schedules and native badges on 2026-10-06.
+Publish only festivals, solar terms and their combined feed. The two failed badge
+probes are frozen historical evidence, not acceptance gates or production inputs.
+Record phone subscription/refresh acceptance honestly; never infer it from CI.
+Do not change device settings. Apple official schedules are subscribed separately.
 
-Only official government announcements supply holiday/workday dates. Algorithm
-libraries are permitted; third-party calendars and personal APIs are not upstreams.
-Retain provenance, fixtures, stable UIDs and confirmed data on every failure.
+Calculate dates offline. Algorithm libraries are permitted; third-party calendars,
+Apple date data, private APIs and library festival/workday tables are not upstreams.
+Use independent HKO fixtures for lunar/solar-term validation. Retain provenance,
+stable UIDs, revision history and last-good publications on every failure.
 
 Run scripts/preflight.py and tests before publication. Stage explicit paths only.
 Preserve unrelated changes. Commit/push/deploy require covering user authority.

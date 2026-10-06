@@ -1,0 +1,19 @@
+timezone = "Asia/Shanghai"
+past_years = 3
+future_years = 3
+
+[categories]
+traditional = true
+common = true
+holy_week = true
+solar_terms = true
+
+[festivals]
+little_new_year = "both" # both, north, south, none
+easter_monday = false
+# Stable IDs are listed in data/festivals.json; applies to all self-hosted feeds.
+disabled_ids = []
+
+[solar_terms]
+# Examples: ["qingming", "dongzhi"]. Empty keeps all 24 terms.
+disabled_ids = []

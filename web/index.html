@@ -1,31 +1,20 @@
 <!doctype html>
-<html lang="zh-CN">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>班休角标兼容测试 · Personal Calendar</title>
+<meta name="description" content="独立计算的常规节日、圣周与二十四节气，七年滚动，支持整合或分类订阅。">
+<title>节日与节气 · Personal Calendar</title>
 <style>
-:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7;color:#182635;background:#f4f7fa}body{max-width:760px;margin:0 auto;padding:32px 20px 64px}h1{font-size:1.85rem;line-height:1.3}h2{font-size:1.2rem;margin-top:32px}.tag{color:#65501a;background:#fff0c2;padding:5px 12px;border-radius:20px;display:inline-block;font-size:.85rem}.card{padding:24px;background:white;border:1px solid #dbe2eb;border-radius:16px;margin-top:20px}.button{display:inline-block;background:#184d86;color:white;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600}a{color:#184d86}code{overflow-wrap:anywhere;font-size:.85rem}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:10px 6px;border-bottom:1px solid #dbe2eb}p,li{overflow-wrap:anywhere}.muted{color:#526475}input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #9aa9bb;border-radius:8px;font:inherit;font-size:.8rem}@media(prefers-color-scheme:dark){:root{color:#e6edf5;background:#101820}.card{background:#192532;border-color:#35465a}a{color:#91bfff}.button{color:white}.muted{color:#afbfce}td,th{border-color:#35465a}input{background:#101820;color:#e6edf5}}@media(max-width:440px){body{padding-top:20px}.card{padding:18px}h1{font-size:1.6rem}}
-</style>
-<header><span class="tag">B1 · 官方结构对照</span><h1>班休角标，继续做一次结构对照。</h1><p class="muted">首版 r{{REVISION}} 已确认事件可见，但原生角标缺失。B1 是新的兼容性候选，尚未证明有效，完整日历仍暂停建设。目标环境：iPhone 18 Pro Max · iOS 27 · 香港地区。</p></header>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75;color:#20382f;background:#f4f6f1;--card:#fff;--line:#d9e1d5;--muted:#617367;--accent:#245c47}*{box-sizing:border-box}body{max-width:920px;margin:auto;padding:48px 24px 72px}header{padding:12px 0 20px}.eyebrow{font-size:.8rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.25;letter-spacing:-.04em;margin:14px 0}h2{font-size:1.2rem;margin:0 0 8px}p{margin:10px 0}.muted{color:var(--muted)}.badge{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:3px 12px;font-size:.85rem;margin-right:6px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;margin:16px 0}.primary{border-top:4px solid var(--accent)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid .card{margin:0}a{color:var(--accent);text-underline-offset:3px}.button{display:inline-block;background:var(--accent);color:#fff;padding:11px 17px;border-radius:9px;text-decoration:none;margin:8px 10px 8px 0;font-weight:600}.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent)}code{font-size:.83rem;overflow-wrap:anywhere}input{width:100%;padding:10px;border-radius:7px;border:1px solid var(--line);font:inherit;font-size:.8rem;background:var(--card);color:inherit}.notice{border-left:3px solid #b08142;padding-left:15px}summary{cursor:pointer;font-weight:600}table{border-collapse:collapse;width:100%;font-size:.9rem;margin-top:14px}td,th{vertical-align:top;text-align:left;border-bottom:1px solid var(--line);padding:10px 7px}.scroll{overflow-x:auto}footer{margin-top:30px;color:var(--muted);font-size:.85rem}@media(max-width:620px){body{padding:24px 16px 48px}.grid{grid-template-columns:1fr}.card{padding:20px}td:last-child,th:last-child{display:none}}@media(prefers-color-scheme:dark){:root{color:#e1ebe4;background:#14221d;--card:#1d2e25;--line:#3c5143;--muted:#b0c3b4;--accent:#a5d5b5}.button{color:#14221d}.secondary{color:var(--accent)}}
+</style></head><body>
+<header><div class="eyebrow">Personal Calendar / SHIKI1255</div><h1>把节日与时节，<br>留在自己的日历里。</h1><p class="muted">常规节日、圣周与二十四节气，按各自规则逐年计算。</p><span class="badge">{{YEARS}} · 七年滚动</span><span class="badge">北京时间 · 全天</span><span class="badge">无提醒</span></header>
 <main>
-<section class="card"><h2 style="margin-top:0">添加新的 B1 对照订阅</h2>
-<p><a class="button" href="webcal://shiki1255.github.io/personal-calendar/compatibility/apple-badges-b1.ics">在 Apple 日历中订阅 B1</a></p>
-<p>按钮无法打开时，在“日历 → 日历 → 添加日历 → 添加订阅日历”中粘贴下方地址。请使用订阅方式，下载后导入不会验证自动刷新。</p>
-<input aria-label="B1 订阅 HTTPS 地址" readonly value="https://shiki1255.github.io/personal-calendar/compatibility/apple-badges-b1.ics">
-<p><a href="compatibility/apple-badges-b1.ics">查看 B1 ICS</a> · <a href="status.json">查看当前测试状态</a></p><p>这是独立对照地址。原 r1 订阅的内容保持不变，不需要删除；测试时先隐藏它。</p></section>
-<section class="card"><h2 style="margin-top:0">检查 2026 年 10 月</h2>
-<p>保留香港地区设置。暂时隐藏 Apple 官方节日日历、原 r1 和其他节假日日历，只显示本次新添加的 B1。它的默认名称是“中国大陆节假日”，请确认订阅地址来自 shiki1255.github.io，不要与官方同名日历混淆。</p>
-<table><thead><tr><th>日期</th><th>事件</th><th>预期原生角标</th></tr></thead><tbody>
-<tr><td>10 月 1—7 日</td><td>国庆节（休），一个连续事件</td><td>休</td></tr>
-<tr><td>10 月 9 日</td><td>普通日期对照 · B1</td><td>无</td></tr>
-<tr><td>10 月 10 日</td><td>国庆节（班）</td><td>班</td></tr>
-<tr><td>10 月 11 日</td><td>普通周末对照 · B1</td><td>无</td></tr>
-</tbody></table>
-<p>“班／休”应出现在日期旁的系统角标位置。事件标题里的“（休）／（班）”文字不算角标通过。</p>
-<p>请在原 Codex 聊天中反馈：10 月 9 日能否看到 B1，10 月 7 日和 10 日是否出现原生角标，9 日与 11 日是否仍无角标。若通过，再在本次地址上测试更新；重新添加 B1 本身不算自动刷新验证通过。无需在此网页提交个人信息。</p>
-</section>
-<section class="card"><h2 style="margin-top:0">本次只测试兼容结构</h2><p>B1 参考 Apple 官方源的分类、语言参数、节日分组及连续假期表示方式。日期仍从政府公告独立取得，事件标识由本项目生成，未复制官方事件或标识。</p><p>这是多项格式同时调整的诊断候选。即使显示成功，也不能据此认定某一个字段就是原因；完整产品的逐日展示、整合订阅及更新仍需验证。</p><p class="muted">原 r1：<a href="compatibility/apple-badges.ics">查看原测试文件</a>。两个测试源不要同时开启。</p></section>
-<section class="card"><h2 style="margin-top:0">通过后提供两种订阅模式</h2><p><strong>整合订阅：</strong>只添加 calendar.ics，包含调休、节日和节气，内部去重。</p><p><strong>分开订阅：</strong>按需组合 holidays.ics、festivals.ics、solar_terms.ics，可以分别显示、隐藏和选颜色。</p><p class="muted">这四个正式订阅目前尚未开放。最终范围为前三年、当年、后三年，按年份滚动。请勿同时添加整合版和它的分类，以免重复。</p></section>
-<p class="muted">日期依据 <a href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202511/t20251104_4258873.html">国务院办公厅官方公告转载</a> · <a href="compatibility/2026-notice.txt">公告正文存档</a> · <a href="https://github.com/SHIKI1255/personal-calendar">项目源码</a></p>
-</main></html>
+<section class="card primary"><h2>整合订阅</h2><p>一个日历包含全部节日与节气。清明节与清明节气合并，复活节只保留一次。</p><a class="button" href="webcal://shiki1255.github.io/personal-calendar/calendar.ics">订阅整合版</a><a href="calendar.ics">查看 ICS</a><input aria-label="整合订阅地址" readonly value="https://shiki1255.github.io/personal-calendar/calendar.ics"></section>
+<section aria-label="分开订阅"><h2>分开订阅</h2><p class="muted">按需选择，可以在日历 App 中分别显示、隐藏与设置颜色。</p><div class="grid"><div class="card"><h2>常规节日与圣周</h2><p>中国传统节日、常见现代节日、复活节与圣周。</p><a class="button secondary" href="webcal://shiki1255.github.io/personal-calendar/festivals.ics">订阅节日</a><a href="festivals.ics">ICS</a><input aria-label="节日订阅地址" readonly value="https://shiki1255.github.io/personal-calendar/festivals.ics"></div><div class="card"><h2>二十四节气</h2><p>完整二十四节气，依据天文算法取北京时间所属日期。</p><a class="button secondary" href="webcal://shiki1255.github.io/personal-calendar/solar_terms.ics">订阅节气</a><a href="solar_terms.ics">ICS</a><input aria-label="节气订阅地址" readonly value="https://shiki1255.github.io/personal-calendar/solar_terms.ics"></div></div></section>
+<section class="card"><h2>选择整合版，或选择分类组合</h2><p>请勿同时添加整合版与其分类，以免重复。切换时先取消旧订阅，再添加新订阅。</p><p>在 iPhone 日历的“日历”列表中选择“添加日历 → 添加订阅日历”，粘贴 HTTPS 地址；也可以使用上面的订阅按钮。不同系统版本的入口名称可能不同。请使用订阅方式，下载后一次性导入不会自动更新。</p><p class="muted">日历 App 与 GitHub Pages 有缓存，订阅内容不保证即时刷新。</p></section>
+<section class="card"><h2>放假与补班：另用 Apple 官方源</h2><p>本项目只显示节日本体，不提供放假安排、补班日期或原生班休角标。</p><p><a href="webcal://calendars.icloud.com/holidays/cn_zh.ics">订阅 Apple 官方日历</a> · <a href="https://calendars.icloud.com/holidays/cn_zh.ics">查看官方源</a></p><p class="notice">官方源也包含部分节日和节气。本项目按你的选择完整保留这些内容，同时显示两个日历时会有重叠，不依赖 Apple 自动跨日历去重。</p></section>
+<section class="card"><details><summary>节日清单与日期计算规则</summary><p>表中列出规则目录。农历、星期规则、复活节和节气均逐年计算；固定公历节日才采用固定月日。复活节星期一为可选项，默认关闭。</p><div class="scroll"><table><thead><tr><th>节日</th><th>计算规则</th><th>配置标识</th></tr></thead><tbody>{{RULES}}</tbody></table></div><h2 style="margin-top:22px">完整二十四节气</h2><p>{{TERMS}}</p><p class="muted">小年默认按南北两种常见口径分别展示。母亲节、父亲节使用本页所列口径；感恩节使用美国口径，复活节使用西方公历算法。</p></details></section>
+<section class="card"><details><summary>更新与维护</summary><p>每周一检查；跨年自动滚动；失败次日重试。每日北京时间 06:17 轻量判断是否需要运行，正常日期生成无需抓取外部日历。</p><p>首版 2023—2029 年农历与节气使用香港天文台资料独立核对。后续重复运行不会无意义地更改事件标识与时间戳。</p><p><a href="status.json">当前版本与覆盖状态</a> · <a href="https://github.com/SHIKI1255/personal-calendar/actions">自动运行记录</a> · <a href="https://github.com/SHIKI1255/personal-calendar/issues">异常记录</a></p></details></section>
+<p class="notice muted">原 r1 与 B1 角标测试均未通过实机验证，已停止维护。请退订旧测试源（路径含 compatibility/apple-badges），再添加正式日历；不要与 Apple 官方源混淆。</p>
+</main><footer><a href="https://github.com/SHIKI1255/personal-calendar">源码与使用说明</a> · <a href="https://www.hko.gov.hk/tc/gts/time/conversion.htm">香港天文台对照资料</a><p>公开订阅，无登录、无广告、无个人信息收集。实际手机刷新验收状态见项目记录。</p></footer>
+</body></html>

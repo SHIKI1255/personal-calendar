@@ -1,0 +1,3 @@
+# Offline algorithm only; no festival lists or work/rest tables.
+lunar_python==1.4.8 --hash=sha256:3aa11cc73c25e70ddf0ba5bdac7398c03acc9491a3aa512a91c9642973b669d6
+tzdata==2025.2 --hash=sha256:1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8

@@ -1,0 +1,50 @@
+[
+  {
+    "year": 2022,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2022c.txt",
+    "sha256": "3b9352be5d12b46b0278d9dc25b03c7de6669df2d89bf94183643b4768ba3d98",
+    "retrieved_at": "2026-10-06T03:15:17.624310+00:00"
+  },
+  {
+    "year": 2023,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2023c.txt",
+    "sha256": "4a5fc4dbb7a1b78824bc2b0cf9c07083f9487e610cece066102759cd5d23edee",
+    "retrieved_at": "2026-10-06T03:15:17.625312+00:00"
+  },
+  {
+    "year": 2024,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2024c.txt",
+    "sha256": "0120d4df9b6638b084dcf35a0633f970ec47f8c1adde2553fba3e3c3570217fc",
+    "retrieved_at": "2026-10-06T03:15:17.635472+00:00"
+  },
+  {
+    "year": 2025,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2025c.txt",
+    "sha256": "7a2803584dcd12a38a13e3710e643369996f59e690d684b9e3705fc5e988ebc2",
+    "retrieved_at": "2026-10-06T03:15:17.646986+00:00"
+  },
+  {
+    "year": 2026,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2026c.txt",
+    "sha256": "7b0831acb16a5a72a1ab553205e938b2f658c3837e06440f22c084e1a39832dd",
+    "retrieved_at": "2026-10-06T03:15:18.700352+00:00"
+  },
+  {
+    "year": 2027,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2027c.txt",
+    "sha256": "2c6a406cd2f8c6f1cf11f154737b7c5ae4afb53c87d76b101bd561b482e3b93f",
+    "retrieved_at": "2026-10-06T03:15:18.708411+00:00"
+  },
+  {
+    "year": 2028,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2028c.txt",
+    "sha256": "4b0c09cc20947f6199106f2664c3b1178f20510f5ccf044be502c352250bb3c0",
+    "retrieved_at": "2026-10-06T03:15:18.715411+00:00"
+  },
+  {
+    "year": 2029,
+    "url": "https://www.hko.gov.hk/tc/gts/time/calendar/text/files/T2029c.txt",
+    "sha256": "4477676453008afe875869c3915acdfc7a62cdbc3c6001751978eea7d7c1f4f7",
+    "retrieved_at": "2026-10-06T03:15:18.724486+00:00"
+  }
+]

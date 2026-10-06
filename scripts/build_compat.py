@@ -1,4 +1,4 @@
-"""Build the gated Apple badge probe, offline and deterministically."""
+"""Reproduce frozen, retired badge probes for historical verification only."""
 from __future__ import annotations
 
 import argparse
@@ -145,17 +145,17 @@ def build(output: Path) -> dict:
     target.write_bytes(calendar)
     candidate = render_grouped_candidate(probe)
     (output / CANDIDATE_FEED).write_bytes(candidate)
-    template = (ROOT / "web/index.html").read_text(encoding="utf-8")
-    (output / "index.html").write_text(template.replace("{{REVISION}}", html.escape(str(probe["revision"]))), encoding="utf-8")
+    template = '<!doctype html><meta charset="utf-8"><title>Retired probe</title><p>角标测试已结束，请退订。<a href="' + BASE + '/">正式日历</a></p>'
+    (output / "index.html").write_text(template, encoding="utf-8")
     (output / ".nojekyll").write_bytes(b"")
-    report = {"phase": "apple_badge_probe", "revision": probe["revision"],
-              "device_acceptance": "pending", "event_count": 4,
+    report = {"phase": "retired_apple_badge_probe", "revision": probe["revision"],
+              "device_acceptance": "failed", "event_count": 4,
               "feed": FEED, "sha256": hashlib.sha256(calendar).hexdigest(),
               "scheduled_data_updates": False,
               "baseline_device_result": "user_reported_events_visible_native_badges_absent",
               "candidate": {"profile": "B1", "feed": CANDIDATE_FEED,
                             "sha256": hashlib.sha256(candidate).hexdigest(),
-                            "event_count": 4, "device_acceptance": "pending"}}
+                            "event_count": 4, "device_acceptance": "failed"}}
     (output / "status.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Only inert source text is published; never copy the government page's scripts.
     for filename in (probe["source_snapshot"], probe["source_metadata"]):

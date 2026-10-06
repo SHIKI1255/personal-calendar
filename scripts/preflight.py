@@ -10,8 +10,8 @@ def check():
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["github_repo"] == "SHIKI1255/personal-calendar", "Wrong target repository"
     assert manifest["default_branch"] == "main", "Unexpected branch policy"
-    assert manifest["phase"] == "apple_badge_probe", "Compatibility gate requires review"
-    assert manifest["device_acceptance"] == "pending", "Do not invent device acceptance"
+    assert manifest["phase"] == "festivals_and_solar_terms", "Unexpected product scope"
+    assert manifest["native_badges"] == "cancelled_by_user"
     assert manifest["automatic_cleanup"] is False
     for filename in ("AGENTS.md", "local_task_preflight_profile.yaml", "LICENSE", "README.md"):
         assert (ROOT / filename).is_file(), "Missing control: " + filename
@@ -22,7 +22,6 @@ def check():
     workflows = ROOT / ".github/workflows"
     for path in workflows.glob("*.yml"):
         content = path.read_text(encoding="utf-8")
-        assert "schedule:" not in content, "Scheduled updates require device acceptance first"
         assert "pull_request_target" not in content, "Untrusted code must not receive write tokens"
     result = subprocess.run(["git", "--no-optional-locks", "rev-parse", "--show-toplevel"], cwd=ROOT,
                             capture_output=True, text=True, check=True)
@@ -37,7 +36,7 @@ def check():
     if remotes.returncode == 0:
         remote = remotes.stdout.strip().lower().removesuffix(".git")
         assert remote in ("https://github.com/shiki1255/personal-calendar", "git@github.com:shiki1255/personal-calendar"), "Wrong origin"
-    print("Local onboarding and publication controls: PASS; device acceptance: PENDING")
+    print("Local publication controls: PASS; actual device acceptance: " + manifest["device_acceptance"])
 
 
 if __name__ == "__main__":
