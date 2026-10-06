@@ -14,7 +14,7 @@ from validate_calendar import validate_ics
 
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
 def build(output, state_output, now, config_path=ROOT / "config.toml", state_path=ROOT / "state/events.json"):
@@ -37,7 +37,7 @@ def build(output, state_output, now, config_path=ROOT / "config.toml", state_pat
     template = (ROOT / "web/index.html").read_text(encoding="utf-8")
     template = template.replace("{{YEARS}}", f"{window[0]}—{window[1]}").replace("{{RULES}}", rows)
     template = template.replace("{{TERMS}}", "、".join(TERMS.values()))
-    (output / "index.html").write_text(template, encoding="utf-8")
+    (output / "index.html").write_text(template, encoding="utf-8", newline="\n")
     (output / ".nojekyll").write_bytes(b"")
     # Frozen probes remain at their old URLs. No new schedule data is fetched or produced.
     probe = load_probe()
@@ -46,6 +46,10 @@ def build(output, state_output, now, config_path=ROOT / "config.toml", state_pat
     (output / CANDIDATE_FEED).write_bytes(render_grouped_candidate(probe))
     for filename in (probe["source_snapshot"], probe["source_metadata"]):
         shutil.copyfile(ROOT / "data/compatibility" / filename, output / "compatibility" / filename)
+        if filename.endswith('.json'):
+            # Git normalizes source JSON; normalize old Windows working copies too.
+            target = output / "compatibility" / filename
+            target.write_text(target.read_text(encoding='utf-8'),encoding='utf-8',newline='\n')
     # Pages' artifact uploader excludes hidden marker files from the public tar.
     files = {p.relative_to(output).as_posix(): digest(p.read_bytes()) for p in sorted(output.rglob("*"))
              if p.is_file() and not p.name.startswith('.')}
