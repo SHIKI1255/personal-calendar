@@ -2,12 +2,12 @@
   "year": 2026,
   "month": "2026-10",
   "week": "2026-W43",
-  "last_checked": "2026-10-19T10:33:51.785377+00:00",
-  "release": "5a52d8e8ccada2fd10566e1ebee963d02eb79fb5a9623ed71077baf3f0b45861",
+  "last_checked": "2026-10-19T10:56:16.297282+00:00",
+  "release": "d21010a8265fdef6b1c0391cde22e1fae677b932ee327dda0ea5153f477d27d5",
   "years": [
     2023,
     2029
   ],
-  "run_url": "https://github.com/SHIKI1255/personal-calendar/actions/runs/39238248770",
+  "run_url": "https://github.com/SHIKI1255/personal-calendar/actions/runs/39240869355",
   "rollback": false
 }
