@@ -13,6 +13,9 @@ def check():
     assert manifest["phase"] == "festivals_and_solar_terms", "Unexpected product scope"
     assert manifest["native_badges"] == "cancelled_by_user"
     assert manifest["automatic_cleanup"] is False
+    from calendar_core import FEEDS, load_inputs
+    load_inputs()
+    assert set(manifest["production_feeds"]) == set(FEEDS), "Feed registry and manifest disagree"
     for filename in ("AGENTS.md", "local_task_preflight_profile.yaml", "LICENSE", "README.md"):
         assert (ROOT / filename).is_file(), "Missing control: " + filename
     for path in ROOT.rglob("*"):

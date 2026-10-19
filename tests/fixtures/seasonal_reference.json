@@ -1,0 +1,13 @@
+{
+  "retrieved_on": "2026-10-19",
+  "purpose": "Independent published facts used only by tests; not production calendar input.",
+  "rules_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html",
+  "geng_anchors": [
+    {"date": "2024-06-25", "source_url": "https://kexie.thnet.gov.cn/kexie/kpzs/202407/7f76d00bee534cb9bcb7aba2c00334c5.shtml"},
+    {"date": "2025-06-30", "source_url": "https://www.hbqj.gov.cn/blhq/zfxxgk/fdzdgknr/gysyjs_34501/yfjj/202507/t20250721_5726395.html"}
+  ],
+  "sanfu_samples": [
+    {"year": 2023, "initial": "2023-07-11", "end": "2023-08-20", "source_url": "https://www.hzzx.gov.cn/cshz/content/2023-07/11/content_8576303.htm"},
+    {"year": 2025, "initial": "2025-07-20", "middle": "2025-07-30", "final": "2025-08-09", "last_inclusive": "2025-08-18", "source_url": "https://zyj.beijing.gov.cn/sy/whkp/202507/t20250709_4145115.html"}
+  ]
+}

@@ -1,77 +1,100 @@
 # Personal Calendar
 
-独立计算的常规节日、圣周与二十四节气。公开订阅，七个完整公历年滚动，默认中文全天、无提醒、不占用忙碌时间。代码 MIT，政府历史记录与 HKO 资料另行注明来源。
+独立计算节日、传统民俗、二十四节气与季节生活节点。公开订阅，前后三年共七个完整公历年滚动，中文全天、无提醒、不占用忙碌时间。
 
-**放假、补班及原生班休角标已取消自建，改为用户另订 Apple 官方源。**本项目不复制或合并 Apple 日历日期。原 r1/B1 角标实机测试均未通过，记录保留，旧角标关卡已撤销。
+放假、补班及原生班休角标由用户另订 [Apple 官方源](https://calendars.icloud.com/holidays/cn_zh.ics)。本项目不复制、代理或按 Apple 数据删减内容；同时显示时可能重叠。旧 r1/B1 角标测试已冻结，请退订，实机未通过记录保留。
 
-## 订阅
+## 订阅方式
 
-[订阅页面](https://shiki1255.github.io/personal-calendar/)
+[打开订阅与检索页面](https://shiki1255.github.io/personal-calendar/)
 
-| 方式 | 固定地址 | 内容 |
+- **整合订阅**：[calendar.ics](https://shiki1255.github.io/personal-calendar/calendar.ics) 包含全部已启用内容，推荐使用。
+- **分类订阅**：从下面八组中按需选择，可在手机上分别隐藏、显示及设色。
+- **旧地址兼容**：[festivals.ics](https://shiki1255.github.io/personal-calendar/festivals.ics) 继续汇总前六组节日，不包含节气、季节节点。已有订阅可继续使用，并按需搭配后两组。
+
+不要同时订阅整合版与分类版；不要将 festivals.ics 与前六组分类重复订阅。切换时先退订旧源再添加新源，不依赖 Apple 跨日历去重。节气的旧地址保持不变。
+
+| 管理分类 | 配置标识 | 独立订阅 | 规则数 |
+|---|---|---|---|
+| 传统节日 | traditional | [traditional.ics](https://shiki1255.github.io/personal-calendar/traditional.ics) | 8 |
+| 传统民俗 | folk | [folk.ics](https://shiki1255.github.io/personal-calendar/folk.ics) | 8 |
+| 公共节日与纪念日 | public | [public.ics](https://shiki1255.github.io/personal-calendar/public.ics) | 10 |
+| 亲情与情感 | family | [family.ics](https://shiki1255.github.io/personal-calendar/family.ics) | 3 |
+| 文化与商业 | culture | [culture.ics](https://shiki1255.github.io/personal-calendar/culture.ics) | 5 |
+| 基督宗教节日 | christian | [christian.ics](https://shiki1255.github.io/personal-calendar/christian.ics) | 8 |
+| 二十四节气 | solar_terms | [solar_terms.ics](https://shiki1255.github.io/personal-calendar/solar_terms.ics) | 24 |
+| 季节生活节点 | seasonal | [seasonal.ics](https://shiki1255.github.io/personal-calendar/seasonal.ics) | 14 |
+
+分类用于个人管理，不宣称是唯一的文化或宗教分类。42 条节日规则、24 个节气、14 类季节节点不等于每个公历年固定生成80条事件；整合版合并清明，农历年初边界也可能影响年度数量。
+
+iPhone 日历中使用“添加日历 → 添加订阅日历”并粘贴 HTTPS 地址，或使用网页 webcal 按钮。不要一次性导入。订阅 URL 不变，客户端自动刷新时间由 Apple 控制；GitHub Pages 实测曾为 max-age=600，不保证即时更新。实际手机验收见 [记录](docs/acceptance.md)，其他客户端未实测。
+
+## 规则、目录与批量管理
+
+规则由分类登记、节日定义、节气定义和季节节点定义统一生成网页与 [机器可读目录](https://shiki1255.github.io/personal-calendar/catalog.json)。网页可按中文名、稳定 ID、分类和 sanfu/shujiu 子组检索，显示真实启用状态、配置位置与归属订阅；筛选只影响目录显示，不修改订阅。
+
+[config.toml](config.toml) 是正式开关入口：
+
+| 操作 | 修改位置 | 影响 |
 |---|---|---|
-| 整合 | [calendar.ics](https://shiki1255.github.io/personal-calendar/calendar.ics) | 全部节日、圣周、节气，内部去重 |
-| 分开 | [festivals.ics](https://shiki1255.github.io/personal-calendar/festivals.ics) | 传统与常见节日、圣周 |
-| 分开 | [solar_terms.ics](https://shiki1255.github.io/personal-calendar/solar_terms.ics) | 二十四节气 |
+| 批量关闭某一分类 | `[categories]` 中对应值设为 `false` | 从整合版、对应分类及兼容合集中一致隐藏，其他分类不变 |
+| 单独关闭某节日 | `[festivals].disabled_ids` 加入目录列出的 ID | 只隐藏该节日，保留规则与历史 |
+| 单独关闭某节气 | `[solar_terms].disabled_ids` 加入其 ID | 不阻止依赖该节气的节日和季节节点计算 |
+| 关闭三伏或数九 | `[seasonal].sanfu` 或 `shujiu` 设为 `false` | 仅关闭该子组 |
+| 关闭某个季节节点 | `[seasonal].disabled_ids` 加入其 ID | 仅关闭该节点 |
+| 选择小年口径 | `[festivals].little_new_year` | both / north / south / none，默认 both |
+| 复活节星期一 | `[festivals].easter_monday` | 已开启，仍可单独关闭 |
 
-选择整合版，或选择一个/两个分类，**不要同时添加整合版与分类版**。切换先退订旧源再添加新源。分类版不为综合去重而删减。放假与补班另订 [Apple 官方源](https://calendars.icloud.com/holidays/cn_zh.ics)；官方也包含节日和节气，同时显示时可能重复。本项目按用户选择保留完整内容，可用配置关闭指定节日。
+分类关闭优先于单项开启。分类关掉后仍发布有效空日历，地址不会404。日常删减用停用配置，不物理删除定义。未知 ID 和不合法配置阻止生成，避免拼错后静默失效。
 
-Apple 日历中使用“添加日历 → 添加订阅日历”并粘贴 HTTPS URL，或点网页上的 webcal 按钮；系统版本不同入口可能不同。不要以一次性导入代替订阅。旧的 compatibility/apple-badges.ics 与 compatibility/apple-badges-b1.ics 已冻结，请退订。
+清明节与清明节气在两个配置段中各自独立，目录使用 `festivals:qingming` / `solar_terms:qingming` 区分；整合版按稳定身份合并。关闭感恩节显示仍可计算黑色星期五，关闭节气显示仍可计算清明、三伏和数九。
 
-GitHub Pages 的 Cache-Control 由平台控制，实测曾为 max-age=600；iOS 另有刷新策略，不保证即时同步，不使用随机查询参数变换订阅身份。当前真实验收状态见 [验收记录](docs/acceptance.md)。其他客户端未实测。
+只读查询示例（不修改配置或写文件）：
 
-## 内容与计算方式
+```powershell
+python -B scripts/catalog.py --category folk
+python -B scripts/catalog.py --search 小年
+python -B scripts/catalog.py --category seasonal --search shujiu --json
+```
 
-完整规则在 [节日定义](data/festivals.json) 和订阅页面，日期按所选地域口径计算，不把某一年结果当作固定规律。
+分类、规则 ID 和独立订阅文件在登记信息中一一对应，后续增删清单不需要修改日期算法。名称和分类不是 UID 的组成部分。
 
-| 类型 | 默认内容及规则 |
-|---|---|
-| 农历 | 春节正月初一、元宵正月十五、龙抬头二月初二、端午五月初五、七夕七月初七、中元七月十五、中秋八月十五、重阳九月初九、腊八十二月初八 |
-| 小年 | 北方十二月二十三、南方十二月二十四各一条；可选 north/south/both/none，不宣称所有地区统一 |
-| 除夕 | 下一次春节前一天，不能固定为十二月三十；闰月不重复过节 |
-| 固定公历 | 元旦 1/1、情人节 2/14、妇女节 3/8、植树节 3/12、愚人节 4/1、劳动节 5/1、青年节 5/4、儿童节 6/1、建党纪念日 7/1、建军节 8/1、教师节 9/10、国庆节 10/1、万圣夜 10/31、平安夜 12/24、圣诞节 12/25、跨年夜 12/31 |
-| 星期规则 | 母亲节五月第二个星期日、父亲节六月第三个星期日、美国感恩节十一月第四个星期四、黑色星期五为感恩节后一天 |
-| 复活节 | 自行实现 USNO 公布的 Oudin 公历算法，使用教会历规则，不用实际天文满月替代；可能在三月或四月 |
-| 圣周及复活节星期一 | 圣枝主日 -7、圣周四 -3、耶稣受难日 -2、圣周六 -1，相对复活节偏移；复活节仅一条，复活节星期一 +1 已启用，可通过配置关闭 |
-| 清明 | 计算当年清明节气的北京时间日期；综合版与清明节合并，不固定在 4/4 或 4/5 |
-| 节气 | 全部 24 个，按太阳黄经计算取北京时间日期，只展示日期，不宣称交节分钟已验证 |
+## 日期计算约定
 
-不同节日同日仍分别保留，例如某年清明与复活节相遇。劳动节、国庆节等仅表示节日本体，不表示放假。
+- 固定月日仅用于定义本身固定的公历节日；母亲节、父亲节和美国感恩节采用原有星期规则，黑色星期五为感恩节后一天。
+- 农历节日逐年转换，不在闰月重复；除夕是下一次春节前一天。新增上巳节采用三月初三、寒衣节十月初一、下元节十月十五口径，地域习俗可能不同。
+- 复活节使用 USNO 公布的 Oudin 西方公历算法；圣枝主日、圣周四、受难日、圣周六、复活节星期一分别偏移 -7、-3、-2、-1、+1 天。
+- 二十四节气由本地算法计算，取北京时间所属日期，不展示未经独立验证的分钟。清明节本体跟随当年的清明节气。
+- 三伏从夏至当天起计第三个庚日为初伏，第四个庚日为中伏，立秋当天起第一个庚日为末伏；节气当天为庚日时计入。初伏和末伏各10天，中伏10或20天，出伏是末伏开始后第10天。
+- 数九从冬至当天开始，每九天一个阶段；一九至九九分别偏移0、9……72天，出九偏移81天。以起始冬至年度保持稳定身份，补算前一年周期后按公历窗口过滤。
+- 季节节点只显示每阶段的开始日，并在说明中标出阶段长度；初伏/入伏、一九/入九各合为一条。冬至与一九含义不同，允许同日分别显示。这些节点不表示实际天气变化或放假。
 
-2026-10-06 补入龙抬头、植树节、青年节、儿童节、建党纪念日、建军节、教师节。2026-10-19 开启复活节星期一，当前共启用 39 条节日规则（小年南北分别计入）。新增固定公历节日采用中国大陆口径；龙抬头由农历二月初二逐年转换，闰月不重复。各新增规则的权威来源 URL 保存在定义文件中，网页规则目录由同一份定义自动生成。
+依据：[USNO](https://aa.usno.navy.mil/faq/easter)、[HKO 节气](https://www.hko.gov.hk/tc/gts/time/24solarterms.htm)、[民俗年历](https://www.ihchina.cn/project_details/18325)、[下元节](https://www.ihchina.cn/project_details/10176/)、[紫金山天文台历书说明](https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html)。三伏测试另保存政府公开历史样本和干支纪日锚点的来源；不使用算法自身生成测试预期。
 
-计算使用 Python 3.12 与锁定的 lunar_python==1.4.8；只调用农历转换/节气算法，不调用其节日清单与调休表。算法完全离线，不以他人 ICS、Apple 日期、私人 API 为上游。
+2026-10-19 本次扩充保留此前39条节日，新增上巳、寒衣、下元，重排八组分类并加入三伏和数九。复活节星期一继续启用。
 
-参考：[USNO 复活节算法](https://aa.usno.navy.mil/faq/easter)、[HKO 二十四节气](https://www.hko.gov.hk/tc/gts/time/24solarterms.htm)、[HKO 公农历对照](https://www.hko.gov.hk/tc/gts/time/conversion.htm)、[算法库与许可证](https://pypi.org/project/lunar_python/1.4.8/)。第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+## 本地生成与修订
 
-## 配置与本地命令
+Python 3.12，锁定 `lunar_python==1.4.8`，只使用农历、节气和基础干支纪日，不使用预置节日、调休、三伏或数九清单。离线生成，不依赖日历 API、数据库、常驻服务或在线 AI。[第三方许可](THIRD_PARTY_NOTICES.md)
 
-[config.toml](config.toml) 使用 Python 标准库读取，无需另装 YAML 解析器。默认前后各三年，以 Asia/Shanghai 当前年份判断；2026 年导出 2023—2029，2027 年导出 2024—2030。保留历史修订状态和校验资料。
-
-类别开关控制传统、常见、圣周、节气；festivals.disabled_ids 按规则文件中的固定 ID 关闭节日；solar_terms.disabled_ids 可关闭指定节气。小年地域和复活节星期一各有开关。关闭感恩节显示不会妨碍计算黑色星期五；关闭清明节本体与关闭清明节气是两个独立选项。
-
-所有本机命令由 PowerShell 7 发起，在专用 Python 3.12 环境中运行：
-
-~~~powershell
+```powershell
 python -m pip install --require-hashes -r requirements.txt -r requirements-test.txt
 python -B scripts/preflight.py
 python -B -m unittest discover -s tests -v
-python -B scripts/calendar_cli.py --output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate --state-output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/candidate-events.json
-python -B scripts/automation.py verify --site D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate
-~~~
+python -B scripts/calendar_cli.py --output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/site --state-output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/events.json
+python -B scripts/automation.py verify --site D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/site
+```
 
-生成必须使用全新、位于源码仓库外的空目录；不覆盖上一成功候选。可加 --as-of 2026-12-31T16:00:00+00:00 测跨年，--config 指定配置，--state 指定历史修订输入。verify 是线上回读命令，需要已经部署同一候选。本地构建不主动提交修订状态，由发布成功步骤维护。
+候选必须在源码仓库外的全新目录中生成，不覆盖上一成功版本。CI 使用 RUNNER_TEMP。`--as-of` 可传带时区的 ISO 时间，`--config` 和 `--state` 可指定输入。verify 必须在部署相同候选后运行。
 
-主要模块：calendar_core.py 负责规则、身份与 ICS；calendar_cli.py 生成候选；validate_calendar.py 独立解析验证；automation.py 负责调度判断、发布回读、健康及告警；tests/fixtures/hko 保存带来源和哈希的独立权威对照。
-
-UID 来自稳定节日 ID 与所属公历/农历年度，与标题和计算出的日期无关。跨年窗口移出后保留修订条目；内容变化才提高 SEQUENCE 并更新时间戳。CRLF、UTF-8 75 字节折行、TEXT 转义、全天排他结束日期均自动验证。
+现有事件保持 UID 和日期规则，分类元数据变化正常增加 SEQUENCE；内容不变的事件保持时间戳和版本。新分类文件与整合版使用同一事件身份，但客户端不会自动跨订阅去重。历史修订条目保留，按字节折行、UTF-8、CRLF、全天排他结束日期均验证。
 
 ## 自动维护与发布
 
 - 每天北京时间 06:17 轻量判断。每周一、当年/当月尚无成功记录、上次失败时运行完整检查；代码配置变化与手动触发立即运行。平台可能延迟或丢失调度。
 - 正常日期完全本地计算，不抓政府或 Apple 数据。无维护任务时不安装依赖、不构建、不访问外部日期站点。
-- 测试 → 候选三份 ICS → 与线上版本比较 → 显式 Pages 部署 → 匿名 HTTP/MIME/全部内容哈希回读 → 持久化修订与真实健康记录。
-- 三份 ICS 同版部署；内容无变化时跳过部署，不重写事件。月度首个完整成功检查保存健康记录；普通周检只留 Actions 日志，不提交无意义日历变化。
+- 测试 → 候选十份 ICS → 与线上版本比较 → 显式 Pages 部署 → 匿名 HTTP/MIME/全部内容哈希回读 → 持久化修订与真实健康记录。
+- 十份 ICS 同版部署；内容无变化时跳过部署，不重写事件。月度首个完整成功检查保存健康记录；普通周检只留 Actions 日志，不提交无意义日历变化。
 - 验证失败不发布；部署或回读失败不记成功，次日重试。维护失败复用一个 Issue，恢复后关闭；正常运行不主动发消息。请在 GitHub 订阅此仓库 Issue/失败 Actions 通知。
 - 最小 job 权限、Actions 固定提交 SHA、依赖锁版本与哈希，不需要长期私人访问令牌。Dependabot 月度归组更新，安全更新不并入普通版本组；任何依赖/算法/工作流更新都不自动合并。
 - PR 检查实际上传、下载候选及 Pages 打包文件，逐文件核对内容；PR 不部署、不写发布状态。升级部署组件后，可手动选择 force_deploy，使用相同日历字节验证完整部署及线上回读；默认仍只在内容变化时发布。
@@ -90,6 +113,6 @@ gh workflow run update-calendar.yml --repo SHIKI1255/personal-calendar -f rollba
 
 ## 验证范围
 
-首版逐日核对 2023—2029 年 2,557 个公历日的农历转换、168 个节气以及全部生成的农历节日；2022 年 HKO 原文只提供跨年月份上下文。测试预期来自 HKO 快照，不由被测算法生成。HKO 不作为自动生成上游。算法与权威基准冲突阻止发布。
+首版逐日核对 2023—2029 年 2,557 个公历日的农历转换、168 个节气以及全部生成的农历节日；2022 年 HKO 原文提供跨年月份上下文和2023年初数九周期的冬至基准。测试预期来自 HKO 快照，不由被测算法生成。HKO 不作为自动生成上游。算法与权威基准冲突阻止发布。
 
 另外覆盖复活节独立算法对照、闰年/闰月、除夕、星期规则、圣周、配置、同日不同节日、UID、折行与结束日期、修订和字节稳定、失败保护、线上校验、告警去重及回滚验证。手机订阅和刷新仍需真实用户验收，不以这些测试代替。

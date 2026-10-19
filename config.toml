@@ -4,14 +4,24 @@ future_years = 3
 
 [categories]
 traditional = true
-common = true
-holy_week = true
+folk = true
+public = true
+family = true
+culture = true
+christian = true
 solar_terms = true
+seasonal = true
 
 [festivals]
 little_new_year = "both" # both, north, south, none
 easter_monday = true
 # Stable IDs are listed in data/festivals.json; applies to all self-hosted feeds.
+disabled_ids = []
+
+[seasonal]
+sanfu = true
+shujiu = true
+# Stable IDs and effective switches: python -B scripts/catalog.py --category seasonal
 disabled_ids = []
 
 [solar_terms]

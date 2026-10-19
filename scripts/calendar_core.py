@@ -17,11 +17,14 @@ from build_compat import fold, text_escape
 
 ROOT = Path(__file__).resolve().parents[1]
 ZONE = ZoneInfo("Asia/Shanghai")
-CATEGORIES = {"traditional": "传统节日", "common": "常见节日", "holy_week": "圣周", "solar_terms": "二十四节气"}
-TERMS = dict(zip(
-    "xiaohan dahan lichun yushui jingzhe chunfen qingming guyu lixia xiaoman mangzhong xiazhi xiaoshu dashu liqiu chushu bailu qiufen hanlu shuangjiang lidong xiaoxue daxue dongzhi".split(),
-    "小寒 大寒 立春 雨水 惊蛰 春分 清明 谷雨 立夏 小满 芒种 夏至 小暑 大暑 立秋 处暑 白露 秋分 寒露 霜降 立冬 小雪 大雪 冬至".split()))
-FEEDS = {"calendar.ics": "节日与二十四节气", "festivals.ics": "常规节日与圣周", "solar_terms.ics": "二十四节气"}
+CATEGORY_REGISTRY = json.loads((ROOT / "data/categories.json").read_text(encoding="utf-8"))
+CATEGORIES = {r["id"]: r["name"] for r in CATEGORY_REGISTRY}
+FESTIVAL_CATEGORIES = {r["id"] for r in CATEGORY_REGISTRY if r["section"] == "festivals"}
+TERMS = json.loads((ROOT / "data/solar_terms.json").read_text(encoding="utf-8"))
+SEASONAL_RULES = json.loads((ROOT / "data/seasonal.json").read_text(encoding="utf-8"))
+FEEDS = {"calendar.ics": "节日、节气与季节节点", "festivals.ics": "节日合集（兼容订阅）",
+         **{r["feed"]: r["name"] for r in CATEGORY_REGISTRY}}
+TERM_DESCRIPTION = "按太阳黄经计算，取北京时间所属日期；只展示日期。"
 
 
 def canonical(value) -> bytes:
@@ -35,6 +38,13 @@ def digest(data: bytes) -> str:
 def load_inputs(config_path=ROOT / "config.toml", rules_path=ROOT / "data/festivals.json"):
     config = tomllib.loads(Path(config_path).read_text(encoding="utf-8"))
     rules = json.loads(Path(rules_path).read_text(encoding="utf-8"))
+    if len(CATEGORIES) != len(CATEGORY_REGISTRY) or len(FEEDS) != len(CATEGORIES) + 2:
+        raise ValueError("Duplicate category or feed")
+    for category in CATEGORY_REGISTRY:
+        if not re.fullmatch(r"[a-z][a-z_]*", category["id"]) or category["feed"] != category["id"] + ".ics":
+            raise ValueError("Invalid category/feed identity")
+        if category["section"] not in ("festivals", "solar_terms", "seasonal"):
+            raise ValueError("Invalid category section")
     if config["timezone"] != "Asia/Shanghai":
         raise ValueError("Lunar/solar algorithm is defined in Beijing time; timezone must be Asia/Shanghai")
     for key in ("past_years", "future_years"):
@@ -50,13 +60,31 @@ def load_inputs(config_path=ROOT / "config.toml", rules_path=ROOT / "data/festiv
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r"[a-z][a-z0-9-]*", x) for x in ids):
         raise ValueError("Invalid or duplicate festival identity")
     for rule in rules:
-        if rule["category"] not in ("traditional", "common", "holy_week") or not rule["name"]:
+        if rule["category"] not in FESTIVAL_CATEGORIES or not rule["name"]:
             raise ValueError("Invalid festival category/name")
         if rule["type"] not in {"fixed", "lunar", "lunar_eve", "solar_term", "nth_weekday", "relative", "easter"}:
             raise ValueError("Unknown festival rule")
         if rule["type"] == "relative" and rule["base"] not in ids:
             raise ValueError("Unknown relative date base")
-    for section, allowed in (("festivals", set(ids)), ("solar_terms", set(TERMS))):
+        if rule.get("optional") not in (None, "easter_monday") or rule.get("region") not in (None, "north", "south"):
+            raise ValueError("Unknown festival option/region")
+    seasonal_ids = [r["id"] for r in SEASONAL_RULES]
+    if len(set(seasonal_ids)) != len(seasonal_ids):
+        raise ValueError("Duplicate seasonal identity")
+    for rule in SEASONAL_RULES:
+        if not re.fullmatch(r"[a-z][a-z0-9-]*", rule["id"]) or not rule["name"]:
+            raise ValueError("Invalid seasonal identity/name")
+        if rule["group"] == "sanfu":
+            if rule["stage"] not in ("initial", "middle", "final", "end"):
+                raise ValueError("Unknown sanfu stage")
+        elif rule["group"] == "shujiu":
+            if type(rule["offset"]) is not int or rule["offset"] not in range(0, 82, 9):
+                raise ValueError("Invalid shujiu offset")
+        else:
+            raise ValueError("Unknown seasonal group")
+    if any(type(config["seasonal"][key]) is not bool for key in ("sanfu", "shujiu")):
+        raise ValueError("Invalid seasonal subgroup switches")
+    for section, allowed in (("festivals", set(ids)), ("solar_terms", set(TERMS)), ("seasonal", set(seasonal_ids))):
         disabled = config[section]["disabled_ids"]
         if not isinstance(disabled, list) or any(not isinstance(x, str) for x in disabled) or not set(disabled) <= allowed:
             raise ValueError("Unknown disabled identity in " + section)
@@ -174,32 +202,116 @@ def rule_description(rule):
     return result + rule.get("note", "") + "\n节日本体，不表示放假或补班安排。"
 
 
+def disabled_reason(config, section, identity, category, rule=None):
+    """One effective-switch policy for generation, CLI and the public catalog."""
+    if not config["categories"][category]:
+        return "分类已关闭"
+    if identity in config[section]["disabled_ids"]:
+        return "单项已关闭"
+    rule = rule or {}
+    if rule.get("optional") and not config["festivals"][rule["optional"]]:
+        return "专用开关已关闭"
+    if rule.get("region") and config["festivals"]["little_new_year"] not in ("both", rule["region"]):
+        return "地域选项未启用"
+    if section == "seasonal" and not config["seasonal"][rule["group"]]:
+        return "季节子组已关闭"
+    return ""
+
+
+def nth_geng(start, n):
+    """Civil-day counting is inclusive; do not use 23:00 astrology day changes."""
+    for offset in range(10 * n):
+        day = start + timedelta(days=offset)
+        if Solar.fromYmd(day.year, day.month, day.day).getLunar().getDayGan() == "庚":
+            n -= 1
+            if n == 0:
+                return day
+    raise ValueError("Unable to locate geng day")
+
+
+@lru_cache(maxsize=128)
+def sanfu(year):
+    terms = solar_terms(year)
+    result = {"initial": nth_geng(terms["xiazhi"], 3),
+              "middle": nth_geng(terms["xiazhi"], 4),
+              "final": nth_geng(terms["liqiu"], 1)}
+    result["end"] = result["final"] + timedelta(days=10)
+    if (result["middle"] - result["initial"]).days != 10 or (result["final"] - result["middle"]).days not in (10, 20):
+        raise ValueError("Invalid sanfu stage lengths")
+    return result
+
+
+def seasonal_rule_description(rule):
+    if rule["group"] == "sanfu":
+        return {"initial": "夏至当天起第三个庚日；初伏开始，共10天。",
+                "middle": "夏至当天起第四个庚日；中伏开始，持续10或20天。",
+                "final": "立秋当天起第一个庚日；末伏开始，共10天。",
+                "end": "末伏开始后第10天；末伏结束后的第一天。"}[rule["stage"]] + "节气当天为庚日时计入。"
+    if rule["offset"] == 81:
+        return "冬至后第81天；九九结束后的第一天。"
+    return f"从冬至当天起计，每九天一阶段；冬至后第{rule['offset']}天开始，本阶段共9天。"
+
+
+def catalog_entries(config, rules):
+    rows = []
+    definitions = [("festivals", r["id"], r["name"], r["category"], rule_description(r), r) for r in rules]
+    definitions += [("solar_terms", key, name, "solar_terms", TERM_DESCRIPTION, {}) for key, name in TERMS.items()]
+    definitions += [("seasonal", r["id"], r["name"], "seasonal", seasonal_rule_description(r), r) for r in SEASONAL_RULES]
+    for section, identity, name, category, description, rule in definitions:
+        group = next(r for r in CATEGORY_REGISTRY if r["id"] == category)
+        reason = disabled_reason(config, section, identity, category, rule)
+        feeds = ["calendar.ics", group["feed"]]
+        if section == "festivals":
+            feeds.append("festivals.ics")
+        rows.append({"key": section + ":" + identity, "id": identity, "name": name,
+                     "category": category, "category_name": group["name"], "section": section,
+                     "config_key": section + ".disabled_ids", "enabled": not reason,
+                     "disabled_reason": reason, "description": description, "feeds": feeds,
+                     "subgroup": rule.get("group", ""), "source_url": rule.get("source_url", "")})
+    order = {key: i for i, key in enumerate(CATEGORIES)}
+    # Stable definition order keeps solar terms and seasonal stages chronological.
+    return sorted(rows, key=lambda r: order[r["category"]])
+
+
 def make_feeds(config, rules, now):
     first, last = year_window(now, config)
     lower, upper = date(first, 1, 1), date(last + 1, 1, 1)
     definitions = {r["id"]: r for r in rules}
-    festivals, terms = [], []
+    by_category = {key: [] for key in CATEGORIES}
     for rule in rules:
-        if not config["categories"][rule["category"]] or rule["id"] in config["festivals"]["disabled_ids"]:
-            continue
-        if rule.get("optional") and not config["festivals"][rule["optional"]]:
-            continue
-        region = rule.get("region")
-        if region and config["festivals"]["little_new_year"] not in ("both", region):
+        if disabled_reason(config, "festivals", rule["id"], rule["category"], rule):
             continue
         lunar = rule["type"] in ("lunar", "lunar_eve")
         for year in range(first - 1, last + 2):
             start = rule_date(rule, year, definitions)
             if lower <= start < upper:
                 identity = f"{rule['id']}-{'l' if lunar else 'g'}{year}"
-                festivals.append(Event(identity, start, rule["name"], rule_description(rule), (CATEGORIES[rule["category"]],)))
-    if config["categories"]["solar_terms"]:
+                by_category[rule["category"]].append(Event(identity, start, rule["name"], rule_description(rule), (CATEGORIES[rule["category"]],)))
+    terms = by_category["solar_terms"]
+    for key, name in TERMS.items():
+        if disabled_reason(config, "solar_terms", key, "solar_terms"):
+            continue
         for year in range(first, last + 1):
-            for key, start in solar_terms(year).items():
-                if key in config["solar_terms"]["disabled_ids"]:
-                    continue
-                identity = f"{'qingming' if key == 'qingming' else 'term-' + key}-g{year}"
-                terms.append(Event(identity, start, TERMS[key], "按太阳黄经计算，取北京时间所属日期；只展示日期。", (CATEGORIES["solar_terms"],)))
+            start = solar_terms(year)[key]
+            identity = f"{'qingming' if key == 'qingming' else 'term-' + key}-g{year}"
+            terms.append(Event(identity, start, name, TERM_DESCRIPTION, (CATEGORIES["solar_terms"],)))
+    for rule in SEASONAL_RULES:
+        if disabled_reason(config, "seasonal", rule["id"], "seasonal", rule):
+            continue
+        for year in range(first - 1, last + 1):
+            description = seasonal_rule_description(rule)
+            if rule["group"] == "sanfu":
+                stages = sanfu(year)
+                start = stages[rule["stage"]]
+                if rule["stage"] == "middle":
+                    description += f"本年中伏{(stages['final'] - stages['middle']).days}天。"
+            else:
+                start = solar_terms(year)["dongzhi"] + timedelta(days=rule["offset"])
+                description += f"所属数九周期始于{year}年冬至。"
+            if lower <= start < upper:
+                description += "\n仅表示历法民俗节点，不是当地天气预报，不表示放假或补班。"
+                by_category["seasonal"].append(Event(f"{rule['id']}-g{year}", start, rule["name"], description, (CATEGORIES["seasonal"],)))
+    festivals = [event for key in CATEGORIES if key in FESTIVAL_CATEGORIES for event in by_category[key]]
     combined = {e.identity: e for e in festivals}
     for event in terms:
         if event.identity in combined:
@@ -210,7 +322,12 @@ def make_feeds(config, rules, now):
                                                categories=old.categories + event.categories)
         else:
             combined[event.identity] = event
-    result = {"calendar.ics": list(combined.values()), "festivals.ics": festivals, "solar_terms.ics": terms}
+    for event in by_category["seasonal"]:
+        if event.identity in combined:
+            raise ValueError("Seasonal identity collides with a festival")
+        combined[event.identity] = event
+    result = {"calendar.ics": list(combined.values()), "festivals.ics": festivals,
+              **{r["feed"]: by_category[r["id"]] for r in CATEGORY_REGISTRY}}
     for events in result.values():
         if len({e.uid for e in events}) != len(events):
             raise ValueError("Duplicate UID")

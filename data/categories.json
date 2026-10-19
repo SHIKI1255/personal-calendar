@@ -1,0 +1,50 @@
+[
+  {
+    "id": "traditional",
+    "name": "传统节日",
+    "section": "festivals",
+    "feed": "traditional.ics"
+  },
+  {
+    "id": "folk",
+    "name": "传统民俗",
+    "section": "festivals",
+    "feed": "folk.ics"
+  },
+  {
+    "id": "public",
+    "name": "公共节日与纪念日",
+    "section": "festivals",
+    "feed": "public.ics"
+  },
+  {
+    "id": "family",
+    "name": "亲情与情感",
+    "section": "festivals",
+    "feed": "family.ics"
+  },
+  {
+    "id": "culture",
+    "name": "文化与商业",
+    "section": "festivals",
+    "feed": "culture.ics"
+  },
+  {
+    "id": "christian",
+    "name": "基督宗教节日",
+    "section": "festivals",
+    "feed": "christian.ics"
+  },
+  {
+    "id": "solar_terms",
+    "name": "二十四节气",
+    "section": "solar_terms",
+    "feed": "solar_terms.ics"
+  },
+  {
+    "id": "seasonal",
+    "name": "季节生活节点",
+    "section": "seasonal",
+    "feed": "seasonal.ics"
+  }
+]

@@ -4,7 +4,8 @@ Use PowerShell 7 for local shell commands. Read local_task_preflight_profile.yam
 and manifest.json before changes. This is SHIKI1255/personal-calendar, branch main.
 
 The user cancelled self-hosted work/rest schedules and native badges on 2026-10-06.
-Publish only festivals, solar terms and their combined feed. The two failed badge
+Publish festivals, solar terms and seasonal milestones in eight category feeds,
+their combined feed and the compatible festivals collection. The two failed badge
 probes are frozen historical evidence, not acceptance gates or production inputs.
 Record phone subscription/refresh acceptance honestly; never infer it from CI.
 Do not change device settings. Apple official schedules are subscribed separately.

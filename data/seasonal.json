@@ -1,0 +1,100 @@
+[
+  {
+    "id": "sanfu-initial",
+    "name": "初伏（入伏）",
+    "group": "sanfu",
+    "stage": "initial",
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "sanfu-middle",
+    "name": "中伏",
+    "group": "sanfu",
+    "stage": "middle",
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "sanfu-final",
+    "name": "末伏",
+    "group": "sanfu",
+    "stage": "final",
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "sanfu-end",
+    "name": "出伏",
+    "group": "sanfu",
+    "stage": "end",
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-1",
+    "name": "一九（入九）",
+    "group": "shujiu",
+    "offset": 0,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-2",
+    "name": "二九开始",
+    "group": "shujiu",
+    "offset": 9,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-3",
+    "name": "三九开始",
+    "group": "shujiu",
+    "offset": 18,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-4",
+    "name": "四九开始",
+    "group": "shujiu",
+    "offset": 27,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-5",
+    "name": "五九开始",
+    "group": "shujiu",
+    "offset": 36,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-6",
+    "name": "六九开始",
+    "group": "shujiu",
+    "offset": 45,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-7",
+    "name": "七九开始",
+    "group": "shujiu",
+    "offset": 54,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-8",
+    "name": "八九开始",
+    "group": "shujiu",
+    "offset": 63,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-9",
+    "name": "九九开始",
+    "group": "shujiu",
+    "offset": 72,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  },
+  {
+    "id": "shujiu-end",
+    "name": "出九",
+    "group": "shujiu",
+    "offset": 81,
+    "source_url": "https://www.pmo.cas.cn/xwdt2019/kpdt2019/202203/t20220317_6399980.html"
+  }
+]

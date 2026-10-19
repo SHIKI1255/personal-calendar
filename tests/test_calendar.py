@@ -28,6 +28,7 @@ class CalendarTests(unittest.TestCase):
         # display preferences must not make the independent date suite fail.
         cls.config.update(past_years=3, future_years=3)
         cls.config['categories'] = {key: True for key in cls.config['categories']}
+        cls.config['categories']['seasonal'] = False
         cls.config['festivals'].update(little_new_year='both', easter_monday=False, disabled_ids=[])
         cls.config['solar_terms']['disabled_ids'] = []
         cls.feeds, cls.window = make_feeds(cls.config, cls.rules, NOW)
@@ -106,7 +107,8 @@ class CalendarTests(unittest.TestCase):
         self.assertEqual(len(self.feeds['solar_terms.ics']), 168)
         self.assertEqual(len(self.feeds['calendar.ics']), len(self.feeds['festivals.ics'])+168-7)
         for name, events in self.feeds.items():
-            self.assertEqual(len([e for e in events if e.identity.startswith('qingming-')]), 7)
+            if name in ('calendar.ics', 'festivals.ics', 'traditional.ics', 'solar_terms.ics'):
+                self.assertEqual(len([e for e in events if e.identity.startswith('qingming-')]), 7)
             self.assertEqual(len({e.uid for e in events}),len(events))
         self.assertFalse(any(e.title == '复活节星期一' for e in self.feeds['festivals.ics']))
 
@@ -166,19 +168,19 @@ class CalendarTests(unittest.TestCase):
             root=Path(folder)
             with patch('calendar_cli.validate_ics',side_effect=ValueError('test failure')):
                 with self.assertRaises(ValueError):
-                    build(root/'site',root/'state.json',NOW)
+                    build(root/'site',root/'state.json',NOW,state_path=root/'input-state.json')
             self.assertFalse((root/'site').exists())
             self.assertFalse((root/'state.json').exists())
             (root/'site').mkdir()
             (root/'site/keep').write_text('last good')
             with self.assertRaises(ValueError):
-                build(root/'site',root/'state.json',NOW)
+                build(root/'site',root/'state.json',NOW,state_path=root/'input-state.json')
             self.assertEqual((root/'site/keep').read_text(),'last good')
 
-    def test_full_candidate_has_three_feeds_and_frozen_probes(self):
+    def test_full_candidate_has_ten_feeds_and_frozen_probes(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)
-            report=build(root/'site',root/'state.json',NOW)
+            report=build(root/'site',root/'state.json',NOW,state_path=root/'input-state.json')
             self.assertEqual(report['years'],list(year_window(NOW,load_inputs()[0])))
             self.assertFalse((root/'site/holidays.ics').exists())
             self.assertTrue((root/'site/compatibility/apple-badges.ics').is_file())
@@ -194,19 +196,27 @@ past_years=0
 future_years=0
 [categories]
 traditional=false
-common=false
-holy_week=false
+folk=false
+public=false
+family=false
+culture=false
+christian=false
 solar_terms=true
+seasonal=false
 [festivals]
 little_new_year="none"
 easter_monday=false
 disabled_ids=[]
 [solar_terms]
 disabled_ids=["qingming"]
+[seasonal]
+sanfu=true
+shujiu=true
+disabled_ids=[]
 ''',encoding='utf-8')
-            report=build(root/'site',root/'state.json',NOW,config_path=config)
+            report=build(root/'site',root/'state.json',NOW,config_path=config,state_path=root/'input-state.json')
             self.assertEqual(report['years'],[2026,2026])
-            self.assertEqual(report['event_counts'],{'calendar.ics':23,'festivals.ics':0,'solar_terms.ics':23})
+            self.assertEqual(report['event_counts'],{name: (23 if name in ('calendar.ics','solar_terms.ics') else 0) for name in self.feeds})
             config.write_text(config.read_text().replace('"qingming"','"unknown-term"'))
             with self.assertRaises(ValueError):load_inputs(config)
 
