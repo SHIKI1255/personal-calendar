@@ -504,6 +504,48 @@
       "modified": "20261006T033147Z",
       "sequence": 0
     },
+    "calendar.ics/easter-monday-g2023": {
+      "created": "20261019T103328Z",
+      "hash": "a9406b18282ddbc128244e07d0df5c8297ac3befeb566144ec0c993dc03a545e",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2024": {
+      "created": "20261019T103328Z",
+      "hash": "d1cb6d4fd5dc7551c7035e2558e0c417858b2d2881204960b74d1227ce86167a",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2025": {
+      "created": "20261019T103328Z",
+      "hash": "58b6bae485d4842b6105fd328fe7f375b33ec4fc3d9de7feafc95717d8b29250",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2026": {
+      "created": "20261019T103328Z",
+      "hash": "237d3025da5649664a79c20911aa9c7be6d7b54f0984c203b299ecd8de26a2a4",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2027": {
+      "created": "20261019T103328Z",
+      "hash": "affe157e6dcf7c6217daf39576372bf676cc57c130d12677a8b61f536a7dff53",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2028": {
+      "created": "20261019T103328Z",
+      "hash": "06f0d3791a7b7e9cd0499a765bf643e9daf74ca4992e8acb087a3fa4c2342283",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "calendar.ics/easter-monday-g2029": {
+      "created": "20261019T103328Z",
+      "hash": "8e2b8292aa7c49bd95091019a0a453d0099da151bc0abd6b5d9fcd8e300099f8",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
     "calendar.ics/fathers-day-g2023": {
       "created": "20261006T033147Z",
       "hash": "aea5c36b331440c8d861d58288a8ebc7b84047ea85b8820593aa51eec0ae41c1",
@@ -3058,6 +3100,48 @@
       "created": "20261006T033147Z",
       "hash": "73f23ca65e90d9d279a8fcda276d06b544c9387ff3e76e91ed06f0d4ff68c9d3",
       "modified": "20261006T033147Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2023": {
+      "created": "20261019T103328Z",
+      "hash": "a9406b18282ddbc128244e07d0df5c8297ac3befeb566144ec0c993dc03a545e",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2024": {
+      "created": "20261019T103328Z",
+      "hash": "d1cb6d4fd5dc7551c7035e2558e0c417858b2d2881204960b74d1227ce86167a",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2025": {
+      "created": "20261019T103328Z",
+      "hash": "58b6bae485d4842b6105fd328fe7f375b33ec4fc3d9de7feafc95717d8b29250",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2026": {
+      "created": "20261019T103328Z",
+      "hash": "237d3025da5649664a79c20911aa9c7be6d7b54f0984c203b299ecd8de26a2a4",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2027": {
+      "created": "20261019T103328Z",
+      "hash": "affe157e6dcf7c6217daf39576372bf676cc57c130d12677a8b61f536a7dff53",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2028": {
+      "created": "20261019T103328Z",
+      "hash": "06f0d3791a7b7e9cd0499a765bf643e9daf74ca4992e8acb087a3fa4c2342283",
+      "modified": "20261019T103328Z",
+      "sequence": 0
+    },
+    "festivals.ics/easter-monday-g2029": {
+      "created": "20261019T103328Z",
+      "hash": "8e2b8292aa7c49bd95091019a0a453d0099da151bc0abd6b5d9fcd8e300099f8",
+      "modified": "20261019T103328Z",
       "sequence": 0
     },
     "festivals.ics/fathers-day-g2023": {
