@@ -10,7 +10,7 @@ solar_terms = true
 
 [festivals]
 little_new_year = "both" # both, north, south, none
-easter_monday = false
+easter_monday = true
 # Stable IDs are listed in data/festivals.json; applies to all self-hosted feeds.
 disabled_ids = []
 
