@@ -21,5 +21,6 @@ Generated local output belongs outside this source tree, under the configured
 workbench partition. CI uses RUNNER_TEMP. Never run implicit cleanup or modify
 other repositories, Codex state, credentials or the central governance registry.
 
-Local controls are self-contained. The central governance context was consulted
-during onboarding; central registration is not claimed or required at runtime.
+Local controls are self-contained. This project is registered in the central
+governance registry; that registry is not required at runtime. Automatic cleanup
+remains disabled.

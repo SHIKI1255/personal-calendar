@@ -11,7 +11,7 @@
     "reported_on": "2026-10-06"
   },
   "local_governance": "self-contained",
-  "central_registry_registered": false,
+  "central_registry_registered": true,
   "local_workbench": "D:/CodexProjects/codex_workbench/projects/personal-calendar",
   "automatic_cleanup": false,
   "native_badges": "cancelled_by_user",
