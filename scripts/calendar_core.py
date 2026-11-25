@@ -13,10 +13,28 @@ import tomllib
 from zoneinfo import ZoneInfo
 
 from lunar_python import Lunar, Solar
-from build_compat import fold, text_escape
 
 ROOT = Path(__file__).resolve().parents[1]
 ZONE = ZoneInfo("Asia/Shanghai")
+
+
+def text_escape(value: str) -> str:
+    return (value.replace("\\", "\\\\").replace("\r\n", "\n")
+            .replace("\r", "\n").replace("\n", "\\n")
+            .replace(";", "\\;").replace(",", "\\,"))
+
+
+def fold(line: str) -> bytes:
+    """75 octets per physical line, without splitting a UTF-8 code point."""
+    result, current = [], bytearray()
+    for char in line:
+        chunk = char.encode("utf-8")
+        if len(current) + len(chunk) > 75:
+            result.append(bytes(current))
+            current = bytearray(b" ")
+        current.extend(chunk)
+    result.append(bytes(current))
+    return b"\r\n".join(result)
 CATEGORY_REGISTRY = json.loads((ROOT / "data/categories.json").read_text(encoding="utf-8"))
 CATEGORIES = {r["id"]: r["name"] for r in CATEGORY_REGISTRY}
 FESTIVAL_CATEGORIES = {r["id"] for r in CATEGORY_REGISTRY if r["section"] == "festivals"}
@@ -220,22 +238,24 @@ def disabled_reason(config, section, identity, category, rule=None):
 
 def nth_geng(start, n):
     """Civil-day counting is inclusive; do not use 23:00 astrology day changes."""
-    for offset in range(10 * n):
+    if n < 1:
+        raise ValueError("Ordinal must be at least 1")
+    for offset in range(10):
         day = start + timedelta(days=offset)
         if Solar.fromYmd(day.year, day.month, day.day).getLunar().getDayGan() == "庚":
-            n -= 1
-            if n == 0:
-                return day
+            return day + timedelta(days=10 * (n - 1))
     raise ValueError("Unable to locate geng day")
 
 
 @lru_cache(maxsize=128)
 def sanfu(year):
     terms = solar_terms(year)
-    result = {"initial": nth_geng(terms["xiazhi"], 3),
-              "middle": nth_geng(terms["xiazhi"], 4),
-              "final": nth_geng(terms["liqiu"], 1)}
-    result["end"] = result["final"] + timedelta(days=10)
+    initial = nth_geng(terms["xiazhi"], 3)
+    final = nth_geng(terms["liqiu"], 1)
+    result = {"initial": initial,
+              "middle": initial + timedelta(days=10),
+              "final": final,
+              "end": final + timedelta(days=10)}
     if (result["middle"] - result["initial"]).days != 10 or (result["final"] - result["middle"]).days not in (10, 20):
         raise ValueError("Invalid sanfu stage lengths")
     return result

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import html
+from importlib.metadata import version as package_version
 import json
 from pathlib import Path
 import shutil
@@ -93,7 +94,7 @@ def build(output, state_output, now, config_path=ROOT / "config.toml", state_pat
                               "enabled_rules": sum(r["enabled"] for r in catalog if r["category"] == group["id"])}
                              for group in CATEGORY_REGISTRY],
               "native_badges": "cancelled", "device_acceptance": manifest["device_acceptance"],
-              "hko_reference_years": [2023, 2029], "algorithm": "lunar_python==1.4.8",
+              "hko_reference_years": [2023, 2029], "algorithm": f"lunar_python=={package_version('lunar_python')}",
               "frozen_probes": "both_user_reported_no_badges; unsubscribe"}
     write_json(output / "status.json", report)
     write_json(state_output, state)

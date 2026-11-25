@@ -28,7 +28,7 @@ concurrency:
 
 defaults:
   run:
-    shell: pwsh
+    shell: bash
 
 jobs:
   plan:
@@ -46,7 +46,7 @@ jobs:
       - id: gate
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python -B scripts/automation.py gate
+        run: python3 -B scripts/automation.py gate
 
   build:
     needs: plan
@@ -59,7 +59,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.12'
+          python-version: '3.14'
       - name: Install locked dependencies
         run: python -m pip install --require-hashes -r requirements.txt -r requirements-test.txt
       - name: Repository preflight
@@ -67,7 +67,7 @@ jobs:
       - name: Date, independent HKO, ICS and failure tests
         run: python -B -m unittest discover -s tests -v
       - name: Build offline candidate
-        run: python -B scripts/calendar_cli.py --output "$env:RUNNER_TEMP/candidate/site" --state-output "$env:RUNNER_TEMP/candidate/events.json"
+        run: python -B scripts/calendar_cli.py --output "$RUNNER_TEMP/candidate/site" --state-output "$RUNNER_TEMP/candidate/events.json"
       - name: Store validated candidate
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -90,7 +90,7 @@ jobs:
           name: candidate
           path: ${{ runner.temp }}/candidate
       - name: Verify downloaded candidate
-        run: python -B scripts/verify_artifacts.py --candidate "$env:RUNNER_TEMP/candidate"
+        run: python3 -B scripts/verify_artifacts.py --candidate "$RUNNER_TEMP/candidate"
       - name: Exercise Pages packaging without deployment
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
@@ -100,7 +100,7 @@ jobs:
           name: github-pages
           path: ${{ runner.temp }}/pages-roundtrip
       - name: Verify Pages archive round trip
-        run: python -B scripts/verify_artifacts.py --candidate "$env:RUNNER_TEMP/candidate" --pages-tar "$env:RUNNER_TEMP/pages-roundtrip/artifact.tar"
+        run: python3 -B scripts/verify_artifacts.py --candidate "$RUNNER_TEMP/candidate" --pages-tar "$RUNNER_TEMP/pages-roundtrip/artifact.tar"
 
   publish:
     needs: [plan, build]
@@ -131,8 +131,11 @@ jobs:
         env:
           EXPECTED_SHA: ${{ github.sha }}
         run: |
-          $actual = git rev-parse HEAD
-          if ($actual -ne $env:EXPECTED_SHA) { throw 'Source changed during build; rerun against current main.' }
+          actual="$(git rev-parse HEAD)"
+          if [ "$actual" != "$EXPECTED_SHA" ]; then
+            echo 'Source changed during build; rerun against current main.' >&2
+            exit 1
+          fi
       - name: Download validated candidate
         if: inputs.rollback_run_id == ''
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -141,10 +144,10 @@ jobs:
           path: ${{ runner.temp }}/candidate
       - name: Restore verified publication artifact
         if: inputs.rollback_run_id != ''
-        run: python -B scripts/automation.py restore --run-id "$env:ROLLBACK_RUN_ID" --directory "$env:RUNNER_TEMP/candidate"
+        run: python3 -B scripts/automation.py restore --run-id "$ROLLBACK_RUN_ID" --directory "$RUNNER_TEMP/candidate"
       - name: Compare live publication
         id: compare
-        run: python -B scripts/automation.py changed --site "$env:RUNNER_TEMP/candidate/site"
+        run: python3 -B scripts/automation.py changed --site "$RUNNER_TEMP/candidate/site"
       - name: Upload complete Pages version
         if: steps.compare.outputs.changed == 'true' || inputs.force_deploy == true
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
@@ -154,7 +157,7 @@ jobs:
         if: steps.compare.outputs.changed == 'true' || inputs.force_deploy == true
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
       - name: Verify anonymous HTTP, MIME and content hashes
-        run: python -B scripts/automation.py verify --site "$env:RUNNER_TEMP/candidate/site"
+        run: python3 -B scripts/automation.py verify --site "$RUNNER_TEMP/candidate/site"
       - name: Retain last-good publication for rollback
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -164,22 +167,25 @@ jobs:
           retention-days: 90
       - name: Record actual success and persist event revisions
         run: |
-          $arguments = @('-B', 'scripts/automation.py', 'success', '--site', "$env:RUNNER_TEMP/candidate/site", '--candidate-state', "$env:RUNNER_TEMP/candidate/events.json")
-          if ($env:ROLLBACK_RUN_ID) { $arguments += '--rollback' }
-          python @arguments
-          if ($LASTEXITCODE -ne 0) { throw 'Success record failed' }
+          args=(-B scripts/automation.py success --site "$RUNNER_TEMP/candidate/site" --candidate-state "$RUNNER_TEMP/candidate/events.json")
+          if [ -n "$ROLLBACK_RUN_ID" ]; then
+            args+=(--rollback)
+          fi
+          python3 "${args[@]}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- state/events.json state/health.json state/health
-          git diff --cached --quiet
-          if ($LASTEXITCODE -eq 1) {
+          diff_rc=0
+          git diff --cached --quiet || diff_rc=$?
+          if [ "$diff_rc" -eq 1 ]; then
             git commit -m 'chore(calendar): record verified publication and health'
-            if ($LASTEXITCODE -ne 0) { throw 'Commit failed' }
             git push origin HEAD:main
-            if ($LASTEXITCODE -ne 0) { throw 'Push failed; no force push is attempted' }
-          } elseif ($LASTEXITCODE -ne 0) { throw 'Git diff failed' }
+          elif [ "$diff_rc" -ne 0 ]; then
+            echo "Git diff failed with exit code $diff_rc" >&2
+            exit "$diff_rc"
+          fi
       - name: Close maintenance alert after recovery
-        run: python -B scripts/automation.py close-issue
+        run: python3 -B scripts/automation.py close-issue
 
   alert:
     needs: [plan, build, publish]
@@ -197,4 +203,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: python -B scripts/automation.py failure
+        run: python3 -B scripts/automation.py failure

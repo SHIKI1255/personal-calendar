@@ -1,6 +1,6 @@
 # personal-calendar
 
-Use PowerShell 7 for local shell commands. Read local_task_preflight_profile.yaml
+Use zsh and the repository .venv (uv, Python 3.14) for local shell commands. Read local_task_preflight_profile.yaml
 and manifest.json before changes. This is SHIKI1255/personal-calendar, branch main.
 
 The user cancelled self-hosted work/rest schedules and native badges on 2026-10-06.
@@ -19,7 +19,7 @@ Run scripts/preflight.py and tests before publication. Stage explicit paths only
 Preserve unrelated changes. Commit/push/deploy require covering user authority.
 Generated local output belongs outside this source tree, under the configured
 workbench partition. CI uses RUNNER_TEMP. Never run implicit cleanup or modify
-other repositories, Codex state, credentials or the central governance registry.
+other repositories, agent tool state, credentials or the central governance registry.
 
 Local controls are self-contained. This project is registered in the central
 governance registry; that registry is not required at runtime. Automatic cleanup

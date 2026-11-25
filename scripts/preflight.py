@@ -1,9 +1,11 @@
 """Non-mutating, repository-local onboarding and publication checks."""
 import json
+import os
 from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+IGNORED_DIRS = {".git", ".venv", "__pycache__"}
 
 
 def check():
@@ -18,10 +20,12 @@ def check():
     assert set(manifest["production_feeds"]) == set(FEEDS), "Feed registry and manifest disagree"
     for filename in ("AGENTS.md", "local_task_preflight_profile.yaml", "LICENSE", "README.md"):
         assert (ROOT / filename).is_file(), "Missing control: " + filename
-    for path in ROOT.rglob("*"):
-        if ".git" in path.parts:
-            continue
-        assert not path.is_symlink(), "Unexpected symlink: " + str(path)
+    for dirpath, dirnames, filenames in os.walk(ROOT, followlinks=False):
+        dirnames[:] = [name for name in dirnames if name not in IGNORED_DIRS]
+        base = Path(dirpath)
+        for name in (*dirnames, *filenames):
+            path = base / name
+            assert not path.is_symlink(), "Unexpected symlink: " + str(path)
     workflows = ROOT / ".github/workflows"
     for path in workflows.glob("*.yml"):
         content = path.read_text(encoding="utf-8")

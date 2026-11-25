@@ -13,7 +13,7 @@ byte-for-byte as frozen historical evidence, with unsubscribe notice.
 Inventory: data/categories.json, festivals.json, solar_terms.json and seasonal.json.
 One effective-switch policy drives feeds, searchable HTML/JSON and read-only CLI.
 Empty categories still publish valid empty ICS. Disable configuration instead of
-deleting definitions; hidden dependencies remain available for date calculation. Python 3.12, lunar_python 1.4.8 (MIT) for offline
+deleting definitions; hidden dependencies remain available for date calculation. Python 3.14, lunar_python 1.4.8 (MIT) for offline
 lunar and solar-term algorithms only. Fixed/weekday/Oudin Easter/relative rules
 belong to this repository. TOML config uses stdlib; JSON definitions avoid another
 parser dependency. No calendar APIs, database, daemon, AI or schedule scraper.

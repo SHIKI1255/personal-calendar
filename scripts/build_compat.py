@@ -3,37 +3,19 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import html
 import json
 import shutil
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from uuid import NAMESPACE_URL, uuid5
 
+from calendar_core import fold, text_escape
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://shiki1255.github.io/personal-calendar"
 FEED = "compatibility/apple-badges.ics"
 CANDIDATE_FEED = "compatibility/apple-badges-b1.ics"
 BADGES = {"holiday": "WORK-HOLIDAY", "workday": "ALTERNATE-WORKDAY"}
-
-
-def text_escape(value: str) -> str:
-    return (value.replace("\\", "\\\\").replace("\r\n", "\n")
-            .replace("\r", "\n").replace("\n", "\\n")
-            .replace(";", "\\;").replace(",", "\\,"))
-
-
-def fold(line: str) -> bytes:
-    """75 octets per physical line, without splitting a UTF-8 code point."""
-    result, current = [], bytearray()
-    for char in line:
-        chunk = char.encode("utf-8")
-        if len(current) + len(chunk) > 75:
-            result.append(bytes(current))
-            current = bytearray(b" ")
-        current.extend(chunk)
-    result.append(bytes(current))
-    return b"\r\n".join(result)
 
 
 def load_probe() -> dict:
@@ -146,7 +128,7 @@ def build(output: Path) -> dict:
     candidate = render_grouped_candidate(probe)
     (output / CANDIDATE_FEED).write_bytes(candidate)
     template = '<!doctype html><meta charset="utf-8"><title>Retired probe</title><p>角标测试已结束，请退订。<a href="' + BASE + '/">正式日历</a></p>'
-    (output / "index.html").write_text(template, encoding="utf-8")
+    (output / "index.html").write_text(template, encoding="utf-8", newline="\n")
     (output / ".nojekyll").write_bytes(b"")
     report = {"phase": "retired_apple_badge_probe", "revision": probe["revision"],
               "device_acceptance": "failed", "event_count": 4,
@@ -156,7 +138,7 @@ def build(output: Path) -> dict:
               "candidate": {"profile": "B1", "feed": CANDIDATE_FEED,
                             "sha256": hashlib.sha256(candidate).hexdigest(),
                             "event_count": 4, "device_acceptance": "failed"}}
-    (output / "status.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (output / "status.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     # Only inert source text is published; never copy the government page's scripts.
     for filename in (probe["source_snapshot"], probe["source_metadata"]):
         shutil.copyfile(ROOT / "data/compatibility" / filename, output / "compatibility" / filename)

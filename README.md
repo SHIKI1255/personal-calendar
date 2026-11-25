@@ -51,10 +51,10 @@ iPhone 日历中使用“添加日历 → 添加订阅日历”并粘贴 HTTPS �
 
 只读查询示例（不修改配置或写文件）：
 
-```powershell
-python -B scripts/catalog.py --category folk
-python -B scripts/catalog.py --search 小年
-python -B scripts/catalog.py --category seasonal --search shujiu --json
+```sh
+.venv/bin/python -B scripts/catalog.py --category folk
+.venv/bin/python -B scripts/catalog.py --search 小年
+.venv/bin/python -B scripts/catalog.py --category seasonal --search shujiu --json
 ```
 
 分类、规则 ID 和独立订阅文件在登记信息中一一对应，后续增删清单不需要修改日期算法。名称和分类不是 UID 的组成部分。
@@ -75,14 +75,15 @@ python -B scripts/catalog.py --category seasonal --search shujiu --json
 
 ## 本地生成与修订
 
-Python 3.12，锁定 `lunar_python==1.4.8`，只使用农历、节气和基础干支纪日，不使用预置节日、调休、三伏或数九清单。离线生成，不依赖日历 API、数据库、常驻服务或在线 AI。[第三方许可](THIRD_PARTY_NOTICES.md)
+Python 3.14（仓内 `uv` `.venv` 隔离），锁定 `lunar_python==1.4.8`，只使用农历、节气和基础干支纪日，不使用预置节日、调休、三伏或数九清单。离线生成，不依赖日历 API、数据库、常驻服务或在线 AI。[第三方许可](THIRD_PARTY_NOTICES.md)
 
-```powershell
-python -m pip install --require-hashes -r requirements.txt -r requirements-test.txt
-python -B scripts/preflight.py
-python -B -m unittest discover -s tests -v
-python -B scripts/calendar_cli.py --output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/site --state-output D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/events.json
-python -B scripts/automation.py verify --site D:/CodexProjects/codex_workbench/projects/personal-calendar/outputs/release-candidate/site
+```sh
+uv venv --python 3.14 .venv
+uv pip install --python .venv/bin/python --require-hashes -r requirements.txt -r requirements-test.txt
+.venv/bin/python -B scripts/preflight.py
+.venv/bin/python -B -m unittest discover -s tests -v
+.venv/bin/python -B scripts/calendar_cli.py --output /Users/gabriel/Projects/_workbench/projects/personal-calendar/outputs/release-candidate/site --state-output /Users/gabriel/Projects/_workbench/projects/personal-calendar/outputs/release-candidate/events.json
+.venv/bin/python -B scripts/automation.py verify --site /Users/gabriel/Projects/_workbench/projects/personal-calendar/outputs/release-candidate/site
 ```
 
 候选必须在源码仓库外的全新目录中生成，不覆盖上一成功版本。CI 使用 RUNNER_TEMP。`--as-of` 可传带时区的 ISO 时间，`--config` 和 `--state` 可指定输入。verify 必须在部署相同候选后运行。
@@ -105,7 +106,7 @@ python -B scripts/automation.py verify --site D:/CodexProjects/codex_workbench/p
 
 每次线上核验成功保存 last-good-site artifact，保留 90 天。到 Actions → Update calendar → Run workflow，将之前**成功的 main 运行 ID**填入 rollback_run_id；留空则正常生成。恢复完整静态版本并重新回读，不倒退事件修订历史。此恢复只改变发布内容，后续常规更新仍按当前源码生成；需要长期停留旧版本时先修正或回退引入问题的代码。
 
-~~~powershell
+~~~sh
 gh workflow run update-calendar.yml --repo SHIKI1255/personal-calendar -f rollback_run_id=RUN_ID
 ~~~
 

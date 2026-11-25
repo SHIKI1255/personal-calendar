@@ -12,7 +12,7 @@
   },
   "local_governance": "self-contained",
   "central_registry_registered": true,
-  "local_workbench": "D:/CodexProjects/codex_workbench/projects/personal-calendar",
+  "local_workbench": "/Users/gabriel/Projects/_workbench/projects/personal-calendar",
   "automatic_cleanup": false,
   "native_badges": "cancelled_by_user",
   "work_rest_schedules": "external_apple_subscription",

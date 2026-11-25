@@ -53,11 +53,16 @@ def gate_due(now, event, health, previous_failed=False):
 
 def gate():
     health_file = ROOT / "state/health.json"
-    health = json.loads(health_file.read_text()) if health_file.exists() else {}
-    runs = gh_api(f"repos/{REPO}/actions/workflows/update-calendar.yml/runs?branch=main&per_page=30")["workflow_runs"]
-    completed = [r for r in runs if str(r['id']) != os.getenv('GITHUB_RUN_ID') and r['status'] == 'completed' and r['event'] != 'pull_request']
-    previous_failed = bool(completed and completed[0]['conclusion'] not in ('success','skipped'))
-    due, reasons = gate_due(datetime.now(timezone.utc), os.getenv("GITHUB_EVENT_NAME", "workflow_dispatch"), health, previous_failed)
+    health = json.loads(health_file.read_text(encoding="utf-8")) if health_file.exists() else {}
+    now = datetime.now(timezone.utc)
+    event = os.getenv("GITHUB_EVENT_NAME", "workflow_dispatch")
+    due, reasons = gate_due(now, event, health, previous_failed=False)
+    if not due:
+        runs = gh_api(f"repos/{REPO}/actions/workflows/update-calendar.yml/runs?branch=main&per_page=30")["workflow_runs"]
+        completed = [r for r in runs if str(r['id']) != os.getenv('GITHUB_RUN_ID') and r['status'] == 'completed' and r['event'] != 'pull_request']
+        previous_failed = bool(completed and completed[0]['conclusion'] not in ('success', 'skipped'))
+        if previous_failed:
+            due, reasons = gate_due(now, event, health, previous_failed=True)
     output("due", str(due).lower())
     print("Reasons: " + ", ".join(reasons or ["no maintenance due"]))
 
@@ -148,15 +153,15 @@ def record_success(site, candidate_state, rollback=False):
     monthly.parent.mkdir(exist_ok=True)
     first_month_check = not monthly.exists()
     if first_month_check:
-        monthly.write_text(json.dumps(health,indent=2)+'\n',encoding='utf-8')
+        monthly.write_text(json.dumps(health,indent=2)+'\n',encoding='utf-8',newline='\n')
     previous_file = state/'health.json'
-    previous = json.loads(previous_file.read_text()) if previous_file.exists() else {}
+    previous = json.loads(previous_file.read_text(encoding='utf-8')) if previous_file.exists() else {}
     if first_month_check or previous.get('release') != report['release'] or rollback:
-        previous_file.write_text(json.dumps(health,indent=2)+'\n',encoding='utf-8')
+        previous_file.write_text(json.dumps(health,indent=2)+'\n',encoding='utf-8',newline='\n')
     # Rollback must not rewind event revision history. Future rebuilds retain latest identities.
     if not rollback:
         candidate = json.loads(candidate_state.read_text(encoding='utf-8'))
-        (state/'events.json').write_text(json.dumps(candidate,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+        (state/'events.json').write_text(json.dumps(candidate,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8',newline='\n')
 
 
 def restore(run_id, directory):
